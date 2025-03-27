@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
-import { FiDownload, FiGithub, FiLinkedin, FiTwitter, FiMail, FiCode, FiServer, FiCloud, FiDatabase } from "react-icons/fi";
+import { FiDownload, FiGithub, FiLinkedin, FiTwitter, FiMail, FiCode, FiServer, FiCloud, FiDatabase, FiSend } from "react-icons/fi";
 import { FaReact, FaNodeJs, FaAws, FaMicrosoft, FaDocker, FaPython } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiTypescript, SiJavascript, SiGraphql } from "react-icons/si";
 import { useState, useEffect } from "react";
+import { Link } from "react-scroll";
 import profileImage from "../assets/login.jpg";
 
 const Hero = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isContactHovered, setIsContactHovered] = useState(false);
   const [runningText, setRunningText] = useState("");
   const fullText = "Hello 🚀, I'm Emmanuel Kiptoo";
 
@@ -195,7 +197,7 @@ const Hero = () => {
   return (
     <motion.section
       id="home"
-      className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 pt-16 sm:pt-20 md:pt-32 pb-0 w-full relative overflow-hidden bg-white"
+      className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 pt-16 sm:pt-20 md:pt-32 pb-0 w-full relative overflow-hidden bg-white mt-0"
     >
       {/* Graphic Design Elements */}
       {designElements.map((design) => (
@@ -353,35 +355,69 @@ const Hero = () => {
           ))}
         </div>
 
-        {/* Download Button */}
-        <motion.button
-          variants={hoverVariants}
-          whileHover="hover"
-          whileTap="tap"
-          onHoverStart={() => setIsHovered(true)}
-          onHoverEnd={() => setIsHovered(false)}
-          className="flex items-center mx-auto md:mx-0 px-6 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg sm:rounded-xl font-medium text-white shadow-lg hover:shadow-xl transition-all duration-300 mt-6 sm:mt-8 group text-sm sm:text-base"
-        >
-          <span>Download Resume</span>
-          <motion.span
-            animate={{ 
-              x: isHovered ? [0, 5, -5, 0] : 0,
-              transition: { 
-                duration: 0.8,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }
-            }}
-            className="ml-2"
+        {/* Button Group */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mt-6 sm:mt-8">
+          {/* Download Button */}
+          <motion.a
+            href="/resume.pdf"
+            download="Emmanuel_Kiptoo_Resume.pdf"
+            variants={hoverVariants}
+            whileHover="hover"
+            whileTap="tap"
+            onHoverStart={() => setIsHovered(true)}
+            onHoverEnd={() => setIsHovered(false)}
+            className="flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg sm:rounded-xl font-medium text-white shadow-lg hover:shadow-xl transition-all duration-300 group text-sm sm:text-base"
           >
-            🚀
-          </motion.span>
-          <motion.span 
-            className="ml-2 group-hover:translate-y-0.5 transition-transform duration-300"
+            <span>Download Resume</span>
+            <motion.span
+              animate={{ 
+                x: isHovered ? [0, 5, -5, 0] : 0,
+                transition: { 
+                  duration: 0.8,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }
+              }}
+              className="ml-2"
+            >
+              🚀
+            </motion.span>
+            <FiDownload className="ml-2 group-hover:translate-y-0.5 transition-transform duration-300" />
+          </motion.a>
+
+          {/* Contact Button */}
+          <Link
+            to="contact"
+            smooth={true}
+            duration={500}
+            offset={-80}
           >
-            <FiDownload />
-          </motion.span>
-        </motion.button>
+            <motion.button
+              variants={hoverVariants}
+              whileHover="hover"
+              whileTap="tap"
+              onHoverStart={() => setIsContactHovered(true)}
+              onHoverEnd={() => setIsContactHovered(false)}
+              className="flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3.5 bg-white border-2 border-blue-500 text-blue-500 rounded-lg sm:rounded-xl font-medium shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 group text-sm sm:text-base"
+            >
+              <span>Contact Me</span>
+              <motion.span
+                animate={{ 
+                  x: isContactHovered ? [0, 5, -5, 0] : 0,
+                  transition: { 
+                    duration: 0.8,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }
+                }}
+                className="ml-2"
+              >
+                ✉️
+              </motion.span>
+              <FiSend className="ml-2 group-hover:translate-y-0.5 transition-transform duration-300" />
+            </motion.button>
+          </Link>
+        </div>
       </motion.div>
 
       {/* Avatar/Image Section */}
