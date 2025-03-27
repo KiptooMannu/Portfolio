@@ -44,18 +44,6 @@ const About = () => {
     { value: "∞", label: "Coffee Cups" },
   ];
 
-  // Floating tech icons with constrained movement
-  const floatingIcons = [
-    { id: 1, icon: <SiReact className="text-blue-500 w-full h-full" />, size: "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14" },
-    { id: 2, icon: <SiTypescript className="text-blue-600 w-full h-full" />, size: "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14" },
-    { id: 3, icon: <SiNextdotjs className="text-black w-full h-full" />, size: "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14" },
-    { id: 4, icon: <SiTailwindcss className="text-cyan-500 w-full h-full" />, size: "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14" },
-    { id: 5, icon: <SiJavascript className="text-yellow-500 w-full h-full" />, size: "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14" },
-    { id: 6, icon: <SiPython className="text-blue-600 w-full h-full" />, size: "w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" },
-    { id: 7, icon: <SiGraphql className="text-pink-500 w-full h-full" />, size: "w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" },
-    
-  ];
-
   return (
     <motion.section
       id="about"
@@ -63,44 +51,15 @@ const About = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="min-h-screen py-12 md:py-20 lg:py-24 flex flex-col justify-center relative overflow-hidden bg-white"
+      className="min-h-screen py-12 md:py-20 lg:py-24 flex flex-col justify-center bg-white"
     >
-      {/* Floating Tech Icons - Now properly contained */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="relative w-full h-full">
-          {floatingIcons.map(({ id, icon, size }) => (
-            <motion.div
-              key={id}
-              className={`absolute ${size} z-0 opacity-90`}
-              initial={{ 
-                x: Math.random() * 70 - 35,
-                y: Math.random() * 70 - 35
-              }}
-              animate={{
-                x: Math.random() * 70 - 35,
-                y: Math.random() * 70 - 35
-              }}
-              transition={{
-                duration: 20 + Math.random() * 10,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut",
-                delay: Math.random() * 5
-              }}
-            >
-              {icon}
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20 relative z-10 px-4"
+        className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20 px-4"
       >
         <motion.h2
           whileInView={{ scale: [1, 1.05, 1] }}
@@ -122,7 +81,7 @@ const About = () => {
       </motion.div>
 
       {/* Main Content */}
-      <div className="flex flex-col md:flex-row gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center relative z-10 px-4 sm:px-6 md:px-8 lg:px-10 max-w-6xl mx-auto">
+      <div className="flex flex-col md:flex-row gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center px-4 sm:px-6 md:px-8 lg:px-10 max-w-6xl mx-auto">
         {/* Left Column */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
