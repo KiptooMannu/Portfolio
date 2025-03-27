@@ -71,12 +71,12 @@ const Contact = () => {
         serviceId,
         templateId,
         {
+          to_email: 'kiptooemmanuel763@gmail.com', // Your email as recipient
           from_name: formData.name,
-          from_email: formData.email,  // Use the user's email here
-          to_email: 'kiptooemmanuel763@gmail.com',  // Your email as recipient
+          from_email: formData.email, // User's email (will be shown in message)
           subject: formData.subject,
-          message: formData.message,
-          reply_to: formData.email  // Important for reply functionality
+          message: `From: ${formData.name} <${formData.email}>\n\nMessage:\n${formData.message}`,
+          reply_to: formData.email // Ensures replies go to user
         },
         publicKey
       );
