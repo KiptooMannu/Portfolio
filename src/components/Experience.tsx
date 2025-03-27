@@ -41,39 +41,59 @@ const Experience = () => {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      viewport={{ once: true, margin: "-100px" }}
-      className="min-h-screen py-20 flex flex-col justify-center"
+      viewport={{ once: true }}
+      className="min-h-screen py-12 md:py-20 lg:py-24 flex flex-col justify-center bg-white"
     >
-      <motion.h2
-        className="text-3xl md:text-5xl font-bold mb-16 text-center"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
+        className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20 px-4"
       >
-        Experience
-      </motion.h2>
+        <motion.h2
+          whileInView={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600"
+        >
+          Experience
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-xs sm:max-w-sm md:max-w-xl lg:max-w-2xl mx-auto"
+        >
+          My professional journey and achievements
+        </motion.p>
+      </motion.div>
 
-      <div className="space-y-12">
+      <div className="flex flex-col gap-8 sm:gap-10 md:gap-12 px-4 sm:px-6 md:px-8 lg:px-10 max-w-6xl mx-auto">
         {experiences.map((exp, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="bg-gray-800/50 p-6 rounded-xl backdrop-blur-sm border border-gray-700"
+            className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 hover:border-blue-400 transition-colors shadow-md"
           >
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-              <h3 className="text-xl md:text-2xl font-bold text-primary">{exp.title}</h3>
-              <span className="text-gray-300">{exp.period}</span>
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-800">{exp.title}</h3>
+              <span className="text-blue-500 font-medium">{exp.period}</span>
             </div>
-            <p className="text-gray-300 mb-4">{exp.description}</p>
+            <p className="text-gray-600 mb-6">{exp.description}</p>
             <div className="flex flex-wrap gap-2">
               {exp.skills.map((skill) => (
-                <span key={skill} className="px-3 py-1 bg-gray-700 rounded-full text-sm">
+                <motion.span
+                  key={skill}
+                  whileHover={{ scale: 1.05 }}
+                  className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm sm:text-base"
+                >
                   {skill}
-                </span>
+                </motion.span>
               ))}
             </div>
           </motion.div>
