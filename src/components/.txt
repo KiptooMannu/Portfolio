@@ -1,0 +1,653 @@
+reference how i had done an import in hero
+import { motion } from "framer-motion";
+import { SiJavascript, SiTypescript, SiReact, SiNextdotjs, SiNodedotjs, SiDocker, SiTailwindcss } from "react-icons/si";
+import { FaCode } from "react-icons/fa";
+import Image from "next/image"; // Import Next.js Image component
+import profileImage from "../public/profile.jpg"; // Import your profile image
+
+const About = () => {
+  const skills = [
+    { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
+    { name: "TypeScript", icon: <SiTypescript className="text-blue-500" /> },
+    { name: "React", icon: <SiReact className="text-blue-400" /> },
+    { name: "Next.js", icon: <SiNextdotjs className="text-white" /> },
+    { name: "Node.js", icon: <SiNodedotjs className="text-green-500" /> },
+    { name: "Docker", icon: <SiDocker className="text-blue-400" /> },
+    { name: "Tailwind CSS", icon: <SiTailwindcss className="text-cyan-400" /> },
+    { name: "Framer Motion", icon: <FaCode className="text-purple-400" /> },
+  ];
+
+  const stats = [
+    { value: "10+", label: "Projects Completed" },
+    { value: "1+", label: "Years Experience" },
+    { value: "100%", label: "Client Satisfaction" },
+    { value: "∞", label: "Coffee Cups" },
+  ];
+
+  return (
+    <motion.section
+      id="about"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="min-h-screen py-20 flex flex-col justify-center relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-950"
+    >
+      {/* Background elements */}
+      <div className="absolute -right-20 -top-20 w-64 h-64 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+      <div className="absolute -left-20 -bottom-20 w-64 h-64 bg-emerald-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+      <div className="absolute left-1/2 bottom-1/2 w-64 h-64 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
+
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="text-center mb-16 relative z-10 px-4"
+      >
+        <motion.h2
+          whileInView={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400"
+        >
+          About Me
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-xl text-gray-300 max-w-2xl mx-auto"
+        >
+          Crafting digital experiences with precision and passion
+        </motion.p>
+      </motion.div>
+
+      <div className="flex flex-col md:flex-row gap-12 items-center relative z-10 px-6 max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="md:w-1/3"
+        >
+          <div className="text-2xl font-bold mb-4 text-white">Who Am I</div>
+          <div className="h-1 w-20 bg-gradient-to-r from-blue-400 to-emerald-400 mb-6"></div>
+          
+          {/* Profile image with proper styling */}
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-blue-400/20 mx-auto mb-8 group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-emerald-400 opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+            <Image 
+              src={profileImage} 
+              alt="Profile Image" 
+              className="object-cover w-full h-full"
+              placeholder="blur"
+              quality={100}
+            />
+          </motion.div>
+          
+          {/* Stats */}
+          <div className="grid grid-cols-2 gap-4">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-gray-800/80 p-4 rounded-lg text-center backdrop-blur-sm border border-gray-700 hover:border-blue-400 transition-colors"
+              >
+                <div className="text-2xl font-bold text-blue-400">{stat.value}</div>
+                <div className="text-sm text-gray-300">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="md:w-2/3"
+        >
+          <p className="text-lg leading-relaxed mb-6 text-gray-300">
+            I am a passionate web developer with expertise in building modern, responsive, and user-friendly interfaces using ReactJS and Next.js. With over a year of professional experience, I specialize in creating seamless digital experiences that combine functionality with aesthetic appeal.
+          </p>
+          <p className="text-lg leading-relaxed mb-6 text-gray-300">
+            My journey in web development has equipped me with comprehensive knowledge across the stack, from crafting pixel-perfect UIs to implementing robust backend solutions. I'm proficient in cloud platforms like Azure and AWS, and I'm constantly exploring new technologies to enhance my skill set.
+          </p>
+          
+          <div className="mb-8">
+            <h3 className="text-xl font-bold mb-4 text-white">My Skills</h3>
+            <div className="flex flex-wrap gap-3">
+              {skills.map((skill) => (
+                <motion.div
+                  key={skill.name}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="flex items-center gap-2 px-4 py-2 bg-gray-800/80 rounded-full backdrop-blur-sm border border-gray-700 hover:border-blue-400 transition-all"
+                >
+                  <span className="text-xl">{skill.icon}</span>
+                  <span className="text-gray-100">{skill.name}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Additional features */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-gray-800/80 p-6 rounded-xl border border-gray-700 hover:border-blue-400 transition-colors backdrop-blur-sm"
+            >
+              <h4 className="text-lg font-bold mb-3 flex items-center gap-2 text-white">
+                <span className="text-blue-400">✦</span> Development Approach
+              </h4>
+              <p className="text-gray-300">
+                I follow a component-driven development methodology with a strong emphasis on performance, accessibility, and clean code architecture.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              viewport={{ once: true }}
+              className="bg-gray-800/80 p-6 rounded-xl border border-gray-700 hover:border-emerald-400 transition-colors backdrop-blur-sm"
+            >
+              <h4 className="text-lg font-bold mb-3 flex items-center gap-2 text-white">
+                <span className="text-emerald-400">✦</span> Continuous Learning
+              </h4>
+              <p className="text-gray-300">
+                Committed to staying current with industry trends, I regularly participate in coding challenges and contribute to open-source projects.
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+};
+
+export default About;
+
+
+and correct the import in about 
+hero
+import { motion } from "framer-motion";
+import { FiDownload, FiGithub, FiLinkedin, FiTwitter, FiMail, FiCode, FiServer, FiCloud, FiDatabase } from "react-icons/fi";
+import { FaReact, FaNodeJs, FaAws, FaMicrosoft, FaDocker, FaPython } from "react-icons/fa";
+import { SiNextdotjs, SiTailwindcss, SiTypescript, SiJavascript, SiGraphql } from "react-icons/si";
+import { useState, useEffect } from "react";
+import profileImage from "../assets/login.jpg"; // Import your image
+
+const Hero = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [runningText, setRunningText] = useState("");
+  const fullText = "Hello 🚀, I'm Emmanuel Kiptoo";
+
+  useEffect(() => {
+    let i = 0;
+    const typingEffect = setInterval(() => {
+      if (i < fullText.length) {
+        setRunningText(fullText.substring(0, i + 1));
+        i++;
+      } else {
+        clearInterval(typingEffect);
+      }
+    }, 100);
+
+    return () => clearInterval(typingEffect);
+  }, []);
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      transition: { duration: 0.5 } 
+    },
+  };
+
+  const hoverVariants = {
+    hover: { 
+      scale: 1.05, 
+      transition: { duration: 0.3 } 
+    },
+    tap: { 
+      scale: 0.95 
+    },
+  };
+
+  // Floating elements with more space between them
+  const floatingElements = [
+    {
+      id: 1,
+      initialX: 0,
+      initialY: 0,
+      animateX: 80,
+      animateY: 80,
+      size: "w-14 h-14",
+      opacity: 0.9,
+      duration: 20,
+      delay: 0,
+      element: <FaReact className="text-blue-500 w-full h-full" />
+    },
+    {
+      id: 2,
+      initialX: 60,
+      initialY: 40,
+      animateX: -60,
+      animateY: 100,
+      size: "w-20 h-12",
+      opacity: 0.9,
+      duration: 22,
+      delay: 3,
+      element: <SiTypescript className="text-blue-600 w-full h-full" />
+    },
+    {
+      id: 3,
+      initialX: -60,
+      initialY: 100,
+      animateX: 60,
+      animateY: 20,
+      size: "w-16 h-16",
+      opacity: 0.9,
+      duration: 24,
+      delay: 1,
+      element: <FaNodeJs className="text-green-500 w-full h-full" />
+    },
+    {
+      id: 4,
+      initialX: 80,
+      initialY: 30,
+      animateX: -80,
+      animateY: 90,
+      size: "w-14 h-14",
+      opacity: 0.9,
+      duration: 21,
+      delay: 4,
+      element: <FaDocker className="text-blue-400 w-full h-full" />
+    },
+    {
+      id: 5,
+      initialX: -40,
+      initialY: 80,
+      animateX: 40,
+      animateY: 60,
+      size: "w-12 h-12",
+      opacity: 0.9,
+      duration: 26,
+      delay: 2,
+      element: <SiJavascript className="text-yellow-500 w-full h-full" />
+    }
+  ];
+
+  // Graphic design elements
+  const designElements = [
+    {
+      id: 'design-1',
+      position: 'absolute top-10 left-10 w-32 h-32',
+      animation: {
+        rotate: [0, 360],
+        transition: { duration: 20, repeat: Infinity, ease: "linear" }
+      },
+      element: (
+        <svg viewBox="0 0 100 100" className="text-blue-100">
+          <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="2" fill="none" />
+        </svg>
+      )
+    },
+    {
+      id: 'design-2',
+      position: 'absolute bottom-20 right-20 w-40 h-40',
+      animation: {
+        scale: [1, 1.1, 1],
+        transition: { duration: 8, repeat: Infinity, ease: "easeInOut" }
+      },
+      element: (
+        <svg viewBox="0 0 100 100" className="text-purple-100">
+          <polygon points="50,5 95,95 5,95" stroke="currentColor" strokeWidth="2" fill="none" />
+        </svg>
+      )
+    }
+  ];
+
+  const webDevSymbols = [
+    { 
+      icon: <FiCode className="text-3xl" />, 
+      title: "Frontend", 
+      desc: "React, Next.js, Tailwind",
+      techIcons: [
+        <FaReact className="text-blue-500" />,
+        <SiNextdotjs className="text-black" />,
+        <SiTailwindcss className="text-cyan-500" />,
+        <SiJavascript className="text-yellow-500" />
+      ]
+    },
+    { 
+      icon: <FiServer className="text-3xl" />, 
+      title: "Backend", 
+      desc: "Node.js, APIs, Databases",
+      techIcons: [
+        <FaNodeJs className="text-green-500" />,
+        <FiDatabase className="text-yellow-500" />,
+        <SiGraphql className="text-pink-500" />
+      ]
+    },
+    { 
+      icon: <FiCloud className="text-3xl" />, 
+      title: "Cloud & DevOps", 
+      desc: "AWS, Azure, Docker, Python",
+      techIcons: [
+        <FaAws className="text-orange-500" />,
+        <FaMicrosoft className="text-blue-600" />,
+        <FaDocker className="text-blue-400" />,
+        <FaPython className="text-blue-700" />
+      ]
+    }
+  ];
+
+  const socialLinks = [
+    { icon: <FiGithub />, url: "#", color: "hover:text-gray-800" },
+    { icon: <FiLinkedin />, url: "#", color: "hover:text-blue-700" },
+    { icon: <FiTwitter />, url: "#", color: "hover:text-blue-400" },
+    { icon: <FiMail />, url: "#", color: "hover:text-red-500" }
+  ];
+
+  return (
+    <motion.section
+      id="home"
+     className="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 pt-20 pb-0 md:pt-32 w-full relative overflow-hidden bg-white"
+   
+    >
+      {/* Graphic Design Elements */}
+      {designElements.map((design) => (
+        <motion.div
+          key={design.id}
+          className={`${design.position} opacity-20 -z-10`}
+          animate={design.animation}
+        >
+          {design.element}
+        </motion.div>
+      ))}
+
+      {/* Floating Tech Icons Container (Top Right) - Larger container with more space */}
+      <div className="absolute top-10 right-10 w-96 h-96 ">
+        {floatingElements.map((element) => (
+          <motion.div
+            key={element.id}
+            className={`absolute ${element.size} z-0`}
+            style={{ opacity: element.opacity }}
+            initial={{ 
+              x: element.initialX,
+              y: element.initialY
+            }}
+            animate={{
+              x: element.animateX,
+              y: element.animateY,
+            }}
+            transition={{
+              duration: element.duration,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+              delay: element.delay
+            }}
+          >
+            {element.element}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Text Content */}
+      <motion.div 
+        variants={itemVariants} 
+        className="md:w-1/2 mb-10 md:mb-0 text-center md:text-left z-10"
+      >
+        {/* Animated Heading */}
+        <motion.h1 
+          className="text-4xl md:text-6xl font-bold mb-4 min-h-[4rem] md:min-h-[6rem] text-gray-800"
+          animate={{
+            x: [-5, 5, -5],
+            transition: {
+              duration: 5,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut"
+            }
+          }}
+        >
+          {runningText}
+          <motion.span
+            animate={{ 
+              rotate: [0, 20, -20, 0],
+              y: [0, -10, 10, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ 
+              repeat: Infinity, 
+              duration: 4,
+              ease: "easeInOut"
+            }}
+            className="inline-block ml-2"
+          >
+            {runningText.includes("🚀") ? "" : "🚀"}
+          </motion.span>
+        </motion.h1>
+
+        {/* Subheading */}
+        <motion.h2 
+          className="text-2xl md:text-3xl font-semibold mb-6 text-gray-700"
+          animate={{
+            x: [0, 10, -10, 0],
+            transition: {
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
+        >
+          <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+            Full Stack Developer & Cloud Specialist
+          </span>
+        </motion.h2>
+
+        {/* Description - No animation */}
+        <p className="text-lg text-gray-600 mb-8 max-w-lg">
+          I build scalable web applications with modern technologies and cloud solutions. 
+          Passionate about creating efficient, user-friendly experiences.
+        </p>
+
+        {/* Web Dev Symbolism Cards */}
+        <div className="flex flex-col md:flex-row gap-4 mb-8">
+          {webDevSymbols.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 + index * 0.1 }}
+              whileHover={{ 
+                scale: 1.03,
+                boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+              }}
+              className="p-6 bg-white rounded-xl border border-gray-200 shadow-md flex flex-col items-center hover:border-blue-200 transition-all duration-300 group flex-1"
+            >
+              <motion.div 
+                className="p-4 rounded-full bg-gradient-to-br from-blue-50 to-purple-50 mb-4 group-hover:from-blue-100 group-hover:to-purple-100 transition-all duration-300"
+                whileHover={{ rotate: 5 }}
+              >
+                {item.icon}
+              </motion.div>
+              <h3 className="font-bold text-gray-800 text-lg mb-2">{item.title}</h3>
+              <p className="text-sm text-gray-500 text-center mb-3">{item.desc}</p>
+              <div className="flex gap-2 mt-2">
+                {item.techIcons.map((techIcon, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ 
+                      scale: 1.2,
+                      y: -5
+                    }}
+                    className="text-xl"
+                  >
+                    {techIcon}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Download Button */}
+        <motion.button
+          variants={hoverVariants}
+          whileHover="hover"
+          whileTap="tap"
+          onHoverStart={() => setIsHovered(true)}
+          onHoverEnd={() => setIsHovered(false)}
+          className="flex items-center mx-auto md:mx-0 px-8 py-3.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl font-medium text-white shadow-lg hover:shadow-xl transition-all duration-300 mt-8 group"
+        >
+          <span>Download Resume</span>
+          <motion.span
+            animate={{ 
+              x: isHovered ? [0, 5, -5, 0] : 0,
+              transition: { 
+                duration: 0.8,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }
+            }}
+            className="ml-2"
+          >
+            🚀
+          </motion.span>
+          <motion.span 
+            className="ml-2 group-hover:translate-y-0.5 transition-transform duration-300"
+          >
+            <FiDownload />
+          </motion.span>
+        </motion.button>
+      </motion.div>
+
+      {/* Avatar/Image Section */}
+      <motion.div className="md:w-1/2 flex justify-center mt-10 md:mt-6 z-10">
+        <motion.div
+          animate={{ 
+            y: [0, -20, 0],
+            rotate: [0, 2, -2, 0]
+          }}
+          transition={{ 
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="relative"
+        >
+          {/* New gradient background */}
+          <motion.div 
+            className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 opacity-90 blur-xl absolute -z-10"
+            animate={{
+              scale: [1, 1.05, 1],
+              opacity: [0.9, 0.95, 0.9]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          {/* Avatar Container */}
+          <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-indigo-200/30 overflow-hidden shadow-2xl relative group">
+            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative">
+              {/* Image implementation */}
+              <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-full">
+                <img 
+                  src={profileImage} 
+                  alt="Emmanuel Kiptoo"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null; 
+                    target.src = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect fill='%23dddddd' width='100' height='100'/%3E%3Ctext fill='%23666666' font-family='sans-serif' font-size='20' dy='.35em' text-anchor='middle' x='50' y='50'%3E👨‍💻%3C/text%3E%3C/svg%3E";
+                  }}
+                />
+              </div>
+              
+              {/* Glow effect on hover */}
+              <div className="absolute inset-0 bg-indigo-200 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+              
+              {/* Tech badge floating around */}
+              <motion.div
+                className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md"
+                animate={{
+                  y: [0, -10, 0],
+                  rotate: [0, 10, -10, 0]
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1
+                }}
+              >
+                <FaReact className="text-blue-500 text-xl" />
+              </motion.div>
+              
+              <motion.div
+                className="absolute bottom-4 left-4 bg-white p-2 rounded-full shadow-md"
+                animate={{
+                  y: [0, 10, 0],
+                  rotate: [0, -10, 10, 0]
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 2
+                }}
+              >
+                <FaNodeJs className="text-green-500 text-xl" />
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Social Links - Vertical on right */}
+      <motion.div 
+        className="hidden md:flex flex-col fixed right-6 top-1/2 transform -translate-y-1/2 space-y-6 z-10"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.8 }}
+      >
+        {socialLinks.map((link, index) => (
+          <motion.a
+            key={index}
+            href={link.url}
+            className={`text-gray-600 transition-colors duration-300 ${link.color}`}
+            whileHover={{ 
+              scale: 1.2,
+            }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+          >
+            <span className="text-2xl">{link.icon}</span>
+          </motion.a>
+        ))}
+      </motion.div>
+    </motion.section>
+  );
+};
+
+export default Hero;
+now import and use the image the way I used in hero
