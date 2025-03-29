@@ -380,7 +380,7 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mt-6 sm:mt-8">
           {/* Download Button */}
           <motion.a
-            href="/Portfolio/resume.pdf"
+          href={import.meta.env.VITE_RESUME_URL}
             download="Emmanuel_Kiptoo_Resume.pdf"
             variants={hoverVariants}
             whileHover="hover"
