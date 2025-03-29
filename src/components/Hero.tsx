@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FiDownload, FiGithub, FiLinkedin, FiTwitter, FiMail, FiCode, FiServer, FiCloud, FiDatabase, FiSend } from "react-icons/fi";
 import { FaReact, FaNodeJs, FaAws, FaMicrosoft, FaDocker, FaPython } from "react-icons/fa";
-import { SiNextdotjs, SiTailwindcss, SiTypescript, SiJavascript, SiGraphql } from "react-icons/si";
+import { SiNextdotjs, SiTailwindcss, SiTypescript, SiJavascript } from "react-icons/si";
 import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import profileImage from "../assets/man.jpg.jpeg";
@@ -170,8 +170,8 @@ const Hero = () => {
       desc: "Node.js, APIs, Databases",
       techIcons: [
         <FaNodeJs className="text-green-500" />,
-        <FiDatabase className="text-yellow-500" />,
-        <SiGraphql className="text-pink-500" />
+        <FiDatabase className="text-yellow-500" />
+  
       ]
     },
     { 

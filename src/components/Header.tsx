@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-scroll";
+import { FaReact } from "react-icons/fa";
+import { SiTypescript, SiJavascript } from "react-icons/si";
 
 interface HeaderProps {
   activeSection: string;
@@ -24,11 +26,50 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
       transition={{ duration: 0.5 }}
       className="container mx-auto px-6 py-4 flex justify-between items-center relative"
     >
-      <motion.div
+      {/* Animated Coding Icons */}
+      <motion.div 
+        className="flex items-center space-x-2"
         whileHover={{ scale: 1.1 }}
-        className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary"
       >
-        EN
+        <motion.div
+          animate={{ 
+            rotate: [0, 20, -20, 0],
+            y: [0, -5, 5, 0]
+          }}
+          transition={{ 
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <FaReact className="text-blue-500 text-2xl" />
+        </motion.div>
+        <motion.div
+          animate={{ 
+            scale: [1, 1.1, 1],
+            y: [0, -5, 0]
+          }}
+          transition={{ 
+            duration: 3,
+            repeat: Infinity,
+            delay: 0.5
+          }}
+        >
+          <SiTypescript className="text-blue-600 text-xl" />
+        </motion.div>
+        <motion.div
+          animate={{ 
+            rotate: [0, 10, -10, 0],
+            y: [0, 5, 0]
+          }}
+          transition={{ 
+            duration: 3.5,
+            repeat: Infinity,
+            delay: 1
+          }}
+        >
+          <SiJavascript className="text-yellow-500 text-xl" />
+        </motion.div>
       </motion.div>
 
       {/* Mobile Menu Button */}
@@ -54,8 +95,8 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
               <Link
                 key={item.id}
                 to={item.id}
-                smooth="easeInOutQuart"  // Smoother easing function
-                duration={0.5}         // Increased duration (1 second)
+                smooth="easeInOutQuart"
+                duration={500}
                 offset={-80}
                 spy={true}
                 activeClass="text-blue-400"
@@ -81,8 +122,8 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
           >
             <Link
               to={item.id}
-              smooth="easeInOutQuart"  // Smoother easing function
-              duration={1000}         // Increased duration (1 second)
+              smooth="easeInOutQuart"
+              duration={1000}
               offset={-80}
               spy={true}
               activeClass="active"
