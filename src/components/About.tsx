@@ -5,17 +5,15 @@ import {
   SiReact, 
   SiNextdotjs, 
   SiNodedotjs, 
-  SiDocker, 
   SiTailwindcss,
   SiPython,
-  SiGraphql,
   SiPostgresql,
   SiGithub,
   SiFirebase,
   SiMongodb
 } from "react-icons/si";
 import { FaCode, FaServer, FaDatabase } from "react-icons/fa";
-import profileImage from "../assets/login.jpg";
+import profileImage from "../assets/Hack.jpg";
 
 const About = () => {
   const skills = [
@@ -25,8 +23,8 @@ const About = () => {
     { name: "Next.js", icon: <SiNextdotjs className="text-black" /> },
     { name: "Node.js", icon: <SiNodedotjs className="text-green-500" /> },
     { name: "Python", icon: <SiPython className="text-blue-600" /> },
-    { name: "GraphQL", icon: <SiGraphql className="text-pink-500" /> },
-    { name: "Docker", icon: <SiDocker className="text-blue-400" /> },
+    // { name: "GraphQL", icon: <SiGraphql className="text-pink-500" /> },
+   
     { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-700" /> },
     { name: "MongoDB", icon: <SiMongodb className="text-green-600" /> },
     { name: "Tailwind CSS", icon: <SiTailwindcss className="text-cyan-400" /> },
@@ -38,7 +36,7 @@ const About = () => {
   ];
 
   const stats = [
-    { value: "10+", label: "Projects Completed" },
+    { value: "4+", label: "Projects Completed" },
     { value: "1+", label: "Years Experience" },
     { value: "100%", label: "Client Satisfaction" },
     { value: "∞", label: "Coffee Cups" },

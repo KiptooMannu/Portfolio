@@ -4,13 +4,13 @@ import { FaReact, FaNodeJs, FaAws, FaMicrosoft, FaDocker, FaPython } from "react
 import { SiNextdotjs, SiTailwindcss, SiTypescript, SiJavascript, SiGraphql } from "react-icons/si";
 import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
-import profileImage from "../assets/login.jpg";
+import profileImage from "../assets/man.jpg.jpeg";
 
 const Hero = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isContactHovered, setIsContactHovered] = useState(false);
   const [runningText, setRunningText] = useState("");
-  const fullText = "Hello 🚀, I'm Emmanuel Kiptoo";
+  const fullText = "Hello 🚀, I'm Kiptoo Rotich Emmanuel ";
 
   useEffect(() => {
     let i = 0;
