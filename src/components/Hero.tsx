@@ -187,11 +187,32 @@ const Hero = () => {
     }
   ];
 
+  // Updated social links with proper URLs, labels, and accessibility attributes
   const socialLinks = [
-    { icon: <FiGithub />, url: "#", color: "hover:text-gray-800" },
-    { icon: <FiLinkedin />, url: "#", color: "hover:text-blue-700" },
-    { icon: <FiTwitter />, url: "#", color: "hover:text-blue-400" },
-    { icon: <FiMail />, url: "#", color: "hover:text-red-500" }
+    { 
+      icon: <FiGithub />, 
+      url: "https://github.com/KiptooMannu", 
+      label: "GitHub Profile",
+      color: "hover:text-gray-800" 
+    },
+    { 
+      icon: <FiLinkedin />, 
+      url: "#", 
+      label: "LinkedIn Profile",
+      color: "hover:text-blue-700" 
+    },
+    { 
+      icon: <FiTwitter />, 
+      url: "https://x.com/EmmanuelKi82897?s=09", 
+      label: "Twitter Profile",
+      color: "hover:text-blue-400" 
+    },
+    { 
+      icon: <FiMail />, 
+      url: "mailto:kiptooemmanuel763@gmail.com", 
+      label: "Send Email",
+      color: "hover:text-red-500" 
+    }
   ];
 
   return (
@@ -516,7 +537,10 @@ const Hero = () => {
           <motion.a
             key={index}
             href={link.url}
-            className={`text-gray-600 transition-colors duration-300 ${link.color}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.label}
+            className={`text-gray-600 transition-colors duration-300 ${link.color} relative group`}
             whileHover={{ 
               scale: 1.2,
             }}
@@ -524,6 +548,11 @@ const Hero = () => {
             transition={{ duration: 0.2 }}
           >
             <span className="text-2xl">{link.icon}</span>
+            {/* Tooltip */}
+            <span className="absolute right-full top-1/2 transform -translate-y-1/2 mr-3 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              {link.label}
+              <span className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></span>
+            </span>
           </motion.a>
         ))}
       </motion.div>
@@ -539,7 +568,10 @@ const Hero = () => {
           <motion.a
             key={index}
             href={link.url}
-            className={`text-gray-600 transition-colors duration-300 ${link.color}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.label}
+            className={`text-gray-600 transition-colors duration-300 ${link.color} relative group`}
             whileHover={{ 
               scale: 1.2,
             }}
@@ -547,6 +579,11 @@ const Hero = () => {
             transition={{ duration: 0.2 }}
           >
             <span className="text-xl">{link.icon}</span>
+            {/* Tooltip */}
+            <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              {link.label}
+              <span className="absolute top-full left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></span>
+            </span>
           </motion.a>
         ))}
       </motion.div>

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import microsoftLogo from "../assets/Bus.jpg";
-import jituLogo from "../assets/Hack.jpg";
-import googleLogo from "../assets/Hero2.jpg";
-import awsLogo from "../assets/login.jpg";
+import ictaLogo from "../assets/ICT.png";
+import teach2giveLogo from "../assets/Teach2give.png";
+import tenwekLogo from "../assets/Tenwek.png";
+import devtownLogo from "../assets/devtown.png"; // Add appropriate logo
 
 interface ExperienceItem {
   title: string;
@@ -16,36 +16,36 @@ interface ExperienceItem {
 const Experience = () => {
   const experiences: ExperienceItem[] = [
     {
-      title: "Gold Microsoft Learn Student Ambassador",
-      company: "Microsoft",
-      period: "April 2023 - Present",
-      description: "As a Gold Microsoft Learn Student Ambassador, I engage with peers, promote technology learning, and contribute to a global community. I facilitate workshops, share insights, and inspire others to explore Microsoft technologies.",
-      skills: ["Hosting events", "Public speaking", "Community building"],
-      logo: microsoftLogo
+      title: "Backend Web Development Bootcamp",
+      company: "DevTown",
+      period: "January 2023",
+      description: "Successfully completed 7-day intensive bootcamp on Backend Development using JavaScript, Node.js and Express, gaining hands-on experience in server-side programming.",
+      skills: ["Node.js", "Express", "Backend Development"],
+      logo: devtownLogo
     },
     {
-      title: "Software Development Trainee",
-      company: "The Jitu",
+      title: "Cybersecurity and Emerging Technologies Training",
+      company: "ICT Authority Kenya & Learnovate",
+      period: "November 2024",
+      description: "Completed comprehensive training on cybersecurity best practices and emerging technologies, earning certification from Kenya's ICT Authority in collaboration with Learnovate.",
+      skills: ["Cybersecurity", "Emerging Tech", "Certification"],
+      logo: ictaLogo
+    },
+    {
+      title: "Software Development Training (Distinction)",
+      company: "Teach2Give",
+      period: "July 2024",
+      description: "Awarded with distinction for outstanding performance in the Software Development Cohort program, demonstrating excellence in programming concepts and practical applications.",
+      skills: ["Software Dev", "Programming", "Distinction"],
+      logo: teach2giveLogo
+    },
+    {
+      title: "Networking Engineer Intern",
+      company: "Tenwek Mission Hospital",
       period: "May 2023 - August 2023",
-      description: "Immersed in a comprehensive training program, gaining expertise in both front-end and back-end development. Collaborating with mentors, I worked on diverse projects, honing my skills for a dynamic career in web development.",
-      skills: ["Fullstack development", "Soft Skills", "Docker"],
-      logo: jituLogo
-    },
-    {
-      title: "Google Crowdsource Influencer",
-      company: "Google",
-      period: "August 2023 - August 2024",
-      description: "Led the community by actively contributing insights, translations, and data annotations to enhance Google products. Collaborated globally to inspire and guide others in improving user experiences.",
-      skills: ["Leadership", "Collaboration", "Community building"],
-      logo: googleLogo
-    },
-    {
-      title: "AWS ReStart Cloud Trainee",
-      company: "Amazon Web Services",
-      period: "April 2024 - August 2024",
-      description: "Completed a hands-on training program focused on AWS fundamentals, including cloud architecture, EC2, S3, RDS, VPCs, IAM, and automation. Developed practical skills for deploying and managing cloud-based applications.",
-      skills: ["Amazon Cloud Services", "Linux", "Cloud Certification"],
-      logo: awsLogo
+      description: "Implemented and maintained network infrastructure, troubleshooting connectivity issues, and ensuring reliable network operations for hospital systems and services.",
+      skills: ["Network Engineering", "Troubleshooting", "Infrastructure"],
+      logo: tenwekLogo
     }
   ];
 
@@ -88,7 +88,7 @@ const Experience = () => {
           viewport={{ once: true }}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600"
         >
-          Experience
+          Experience & Certifications
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -97,7 +97,7 @@ const Experience = () => {
           viewport={{ once: true }}
           className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-xs sm:max-w-sm md:max-w-xl lg:max-w-2xl mx-auto"
         >
-          My professional journey and achievements
+          My professional journey and learning achievements
         </motion.p>
       </motion.div>
 

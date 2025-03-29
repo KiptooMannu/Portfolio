@@ -23,7 +23,7 @@ const Contact = () => {
     { 
       icon: <FiGithub />, 
       name: "GitHub", 
-      link: "https://github.com/yourusername" 
+      link: "https://github.com/KiptooMannu" 
     },
     { 
       icon: <FiLinkedin />, 
@@ -33,7 +33,7 @@ const Contact = () => {
     { 
       icon: <FiTwitter />, 
       name: "Twitter", 
-      link: "https://twitter.com/yourusername" 
+      link: "https://x.com/EmmanuelKi82897?s=09" 
     },
     { 
       icon: <FiMail />, 

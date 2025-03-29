@@ -4,31 +4,25 @@
 
 
 
-@keyframes flash {
-    0% { background-color: #dc2626; }  /* Red */
-    50% { background-color: #ef4444; } /* Lighter Red */
-    100% { background-color: #dc2626; } /* Red */
-  }
-  
-  .animate-flash {
-    animation: flash 1s infinite alternate; /* Keep flashing */
-  }
-  
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Adjust this to match your header height */
+}
 
-  @keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0.4; }
-    100% { opacity: 1; }
-  }
-  
-  .animate-blink {
-    animation: blink 1s infinite;
-  }
+/* Optional: Custom scrollbar for smoother visual experience */
+::-webkit-scrollbar {
+  width: 8px;
+}
 
-  
-  @keyframes blink {
-    0% { opacity: 1; border: 2px solid red; box-shadow: 0px 0px 10px red; }
-    50% { opacity: 0.4; border: 2px solid transparent; box-shadow: none; }
-    100% { opacity: 1; border: 2px solid red; box-shadow: 0px 0px 10px red; }
-  }
-  
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
