@@ -1,4 +1,3 @@
-
 import { Header, Hero, About, Experience, Projects, Contact, Footer } from './components/Index'
 import { useState } from 'react';
 
@@ -9,11 +8,11 @@ const App = () => {
     <div className="min-h-screen bg-gradient-to-br from-dark to-gray-900 text-light font-sans overflow-x-hidden">
       <Header activeSection={activeSection} setActiveSection={setActiveSection} />
       <main className="container mx-auto px-6">
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Contact />
+        <section id="home"><Hero /></section>
+        <section id="about"><About /></section>
+        <section id="experience"><Experience /></section>
+        <section id="projects"><Projects /></section>
+        <section id="contact"><Contact /></section>
       </main>
       <Footer />
     </div>
