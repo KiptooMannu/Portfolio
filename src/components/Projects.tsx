@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 import { FaReact, FaNodeJs, FaAws } from "react-icons/fa";
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiFirebase, SiDocker } from "react-icons/si";
-import healthJferImage from "../assets/Bus.jpg"; // Match your hero image import style
+import autoSeatImage from "../assets/auto.jpg"; 
 import galleryAppImage from "../assets/bus station.jpg";
 import prismCloudImage from "../assets/Hero.png";
 
@@ -19,16 +19,21 @@ interface Project {
 
 const Projects = () => {
   const projects: Project[] = [
-    {
-      title: "HealthJfer",
-      description: "Empowering women with accessible health resources and personalized wellness solutions through an intuitive platform.",
-      githubLink: "https://github.com/yourusername/healthjfer",
-      liveLink: "https://healthjfer.com",
-      techStack: ["React", "TypeScript", "Node.js", "Firebase"],
-      features: ["User authentication", "Health tracking", "Personalized recommendations", "Community forum"],
-      category: "Health Tech",
-      image: healthJferImage
-    },
+   {
+  title: "AutoSeat PSV",
+  description: "A modern seat booking system for public service vehicles, streamlining reservations and fleet management for transport operators.",
+  githubLink: "https://github.com/kiptoomannu/Auto-seat-psv-Client",
+  liveLink: "https://kiptoomannu.github.io/Auto-seat-psv-Client/",
+  techStack: ["React", "TypeScript", "Node.js", "MongoDB"],
+  features: [
+    "Real-time seat booking",
+    "Admin dashboard",
+    "Payment integration",
+    "Booking analytics"
+  ],
+  category: "Transport Tech",
+  image: autoSeatImage
+}
     {
       title: "Gallery App",
       description: "Modern and responsive gallery app with secure authentication, efficient image storage, and real-time updates.",
