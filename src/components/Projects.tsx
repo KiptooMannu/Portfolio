@@ -24,7 +24,7 @@ const Projects = () => {
   description: "A modern seat booking system for public service vehicles, streamlining reservations and fleet management for transport operators.",
   githubLink: "https://github.com/kiptoomannu/Auto-seat-psv-Client",
   liveLink: "https://kiptoomannu.github.io/Auto-seat-psv-Client/",
-  techStack: ["React", "TypeScript", "Node.js", "MongoDB"],
+  techStack: ["React", "TypeScript", "Node.js", "PostgreSQL"],
   features: [
     "Real-time seat booking",
     "Admin dashboard",
