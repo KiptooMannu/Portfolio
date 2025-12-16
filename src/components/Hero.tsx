@@ -3,7 +3,7 @@ import { FiDownload, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 import { FaReact, FaNodeJs, FaDocker, FaAws } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss } from "react-icons/si";
 import { useEffect, useState } from "react";
-import profileImage from "../assets/man.jpg.jpeg";
+import profileImage from "../assets/Mannu1.jpeg";
 
 /* ---------------------------------- */
 /* CONFIG                             */
