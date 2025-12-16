@@ -1,203 +1,230 @@
 import { motion } from "framer-motion";
-import { 
-  SiJavascript, 
-  SiTypescript, 
-  SiReact, 
-  SiNextdotjs, 
-  SiNodedotjs, 
+import {
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
   SiTailwindcss,
   SiPython,
   SiPostgresql,
+  SiMongodb,
   SiGithub,
   SiFirebase,
-  SiMongodb
 } from "react-icons/si";
 import { FaCode, FaServer, FaDatabase } from "react-icons/fa";
 import profileImage from "../assets/Hack.jpg";
 
-const About = () => {
-  const skills = [
-    { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
-    { name: "TypeScript", icon: <SiTypescript className="text-blue-500" /> },
-    { name: "React", icon: <SiReact className="text-blue-400" /> },
-    { name: "Next.js", icon: <SiNextdotjs className="text-black" /> },
-    { name: "Node.js", icon: <SiNodedotjs className="text-green-500" /> },
-    { name: "Python", icon: <SiPython className="text-blue-600" /> },
-    // { name: "GraphQL", icon: <SiGraphql className="text-pink-500" /> },
-   
-    { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-700" /> },
-    { name: "MongoDB", icon: <SiMongodb className="text-green-600" /> },
-    { name: "Tailwind CSS", icon: <SiTailwindcss className="text-cyan-400" /> },
-    { name: "Git/GitHub", icon: <SiGithub className="text-gray-800" /> },
-    { name: "Firebase", icon: <SiFirebase className="text-yellow-500" /> },
-    { name: "Backend", icon: <FaServer className="text-purple-500" /> },
-    { name: "Database", icon: <FaDatabase className="text-blue-500" /> },
-    { name: "Framer Motion", icon: <FaCode className="text-purple-400" /> },
-  ];
+/* ---------------------------------- */
+/* CONFIG                             */
+/* ---------------------------------- */
 
-  const stats = [
-    { value: "4+", label: "Projects Completed" },
-    { value: "1+", label: "Years Experience" },
-    { value: "100%", label: "Client Satisfaction" },
-    { value: "∞", label: "Coffee Cups" },
-  ];
+const skillGroups = [
+  {
+    title: "Frontend",
+    icon: <FaCode />,
+    skills: [
+      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" />, tip: "ES6+, async patterns, performance" },
+      { name: "TypeScript", icon: <SiTypescript className="text-blue-500" />, tip: "Type safety, scalable apps" },
+      { name: "React", icon: <SiReact className="text-blue-400" />, tip: "Hooks, state management" },
+      { name: "Next.js", icon: <SiNextdotjs />, tip: "SSR, routing, SEO" },
+      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-cyan-400" />, tip: "Responsive UI systems" },
+    ],
+  },
+  {
+    title: "Backend",
+    icon: <FaServer />,
+    skills: [
+      { name: "Node.js", icon: <SiNodedotjs className="text-green-500" />, tip: "APIs, authentication" },
+      { name: "Python", icon: <SiPython className="text-blue-600" />, tip: "Automation, scripting" },
+      { name: "Firebase", icon: <SiFirebase className="text-yellow-500" />, tip: "Auth, real-time DB" },
+    ],
+  },
+  {
+    title: "Database & Tools",
+    icon: <FaDatabase />,
+    skills: [
+      { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-700" />, tip: "Relational data modeling" },
+      { name: "MongoDB", icon: <SiMongodb className="text-green-600" />, tip: "NoSQL schemas" },
+      { name: "Git & GitHub", icon: <SiGithub className="text-gray-800" />, tip: "Collaboration & CI" },
+    ],
+  },
+];
+
+const stats = [
+  { value: "4+", label: "Production Projects" },
+  { value: "1+", label: "Years Experience" },
+  { value: "100%", label: "Quality Mindset" },
+  { value: "∞", label: "Continuous Learning" },
+];
+
+const timeline = [
+  { year: "2023", text: "Started deep focus on full-stack development" },
+  { year: "2024", text: "Built and deployed scalable real-world apps" },
+  { year: "2025", text: "Specializing in cloud-ready web solutions" },
+];
+
+const principles = [
+  "Clean, scalable architecture",
+  "Performance & accessibility first",
+  "Readable, maintainable code",
+  "Continuous improvement mindset",
+];
+
+/* ---------------------------------- */
+/* COMPONENT                          */
+/* ---------------------------------- */
+
+export default function About() {
+  // const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.section
+    <section
       id="about"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-      className="min-h-screen py-12 md:py-20 lg:py-24 flex flex-col justify-center bg-white"
+      className="relative py-24 bg-gradient-to-b from-white to-slate-50 overflow-hidden"
     >
-      {/* Header Section */}
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20 px-4"
-      >
-        <motion.h2
-          whileInView={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600"
-        >
-          About Me
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-xs sm:max-w-sm md:max-w-xl lg:max-w-2xl mx-auto"
-        >
-          Crafting digital experiences with precision and passion
-        </motion.p>
-      </motion.div>
+      {/* Background Accent */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#6366f120,transparent_40%)]" />
 
-      {/* Main Content */}
-      <div className="flex flex-col md:flex-row gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center px-4 sm:px-6 md:px-8 lg:px-10 max-w-6xl mx-auto">
-        {/* Left Column */}
+      <div className="relative max-w-6xl mx-auto px-6">
+
+        {/* HEADER */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="w-full md:w-2/5 lg:w-1/3 px-4"
+          transition={{ duration: 0.7 }}
+          className="text-center mb-20"
         >
-          <div className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-800">Who Am I</div>
-          <div className="h-1 w-16 sm:w-20 bg-gradient-to-r from-blue-500 to-purple-600 mb-4 sm:mb-6"></div>
-          
-          {/* Profile Image */}
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto mb-6 sm:mb-8 group"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-20 group-hover:opacity-30 transition-opacity duration-300 rounded-full"></div>
-            <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-full border-4 border-blue-400/20">
-              <img 
-                src={profileImage} 
-                alt="Profile Image" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null; 
-                  target.src = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect fill='%23dddddd' width='100' height='100'/%3E%3Ctext fill='%23666666' font-family='sans-serif' font-size='20' dy='.35em' text-anchor='middle' x='50' y='50'%3E👨‍💻%3C/text%3E%3C/svg%3E";
-                }}
-              />
-            </div>
-          </motion.div>
-          
-          {/* Stats */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white p-3 sm:p-4 rounded-lg text-center border border-gray-200 hover:border-blue-400 transition-colors shadow-sm"
-              >
-                <div className="text-xl sm:text-2xl font-bold text-blue-500">{stat.value}</div>
-                <div className="text-xs sm:text-sm text-gray-600">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+            About Me
+          </h2>
+          <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
+            A developer focused on building scalable, clean, and meaningful digital solutions.
+          </p>
         </motion.div>
 
-        {/* Right Column */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="w-full md:w-3/5 lg:w-2/3 px-4"
-        >
-          <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-600">
-            I am a passionate full-stack developer with expertise in building modern, responsive, and scalable web applications. With professional experience across the stack, I specialize in creating seamless digital experiences that combine functionality with aesthetic appeal.
-          </p>
-          <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-6 sm:mb-8 text-gray-600">
-            My technical journey has equipped me with comprehensive knowledge from crafting pixel-perfect UIs to implementing robust backend solutions and cloud infrastructure. I'm proficient in JavaScript/TypeScript ecosystems, Python, and cloud platforms like AWS and Azure, constantly exploring new technologies to enhance my skill set.
-          </p>
-          
-          {/* Skills Section */}
-          <div className="mb-6 sm:mb-8 md:mb-10">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 text-gray-800">My Skills</h3>
-            <div className="flex flex-wrap gap-2 sm:gap-3">
-              {skills.map((skill) => (
+        {/* MAIN GRID */}
+        <div className="grid md:grid-cols-2 gap-16 items-start">
+
+          {/* LEFT */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            {/* IMAGE */}
+            <div className="relative w-64 h-64 mx-auto mb-10">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 blur-xl opacity-30" />
+              <img
+                src={profileImage}
+                alt="Emmanuel Kiptoo"
+                className="relative w-full h-full rounded-full object-cover border-4 border-white shadow-xl"
+              />
+            </div>
+
+            {/* STATS */}
+            <div className="grid grid-cols-2 gap-4">
+              {stats.map((stat, i) => (
                 <motion.div
-                  key={skill.name}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-2 bg-white rounded-full border border-gray-200 hover:border-blue-400 transition-all shadow-sm text-sm sm:text-base"
+                  key={i}
+                  whileHover={{ scale: 1.05 }}
+                  className="p-4 rounded-xl bg-white border border-gray-200 text-center shadow-sm"
                 >
-                  <span className="text-lg sm:text-xl">{skill.icon}</span>
-                  <span className="text-gray-700">{skill.name}</span>
+                  <div className="text-2xl font-bold text-blue-500">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    {stat.label}
+                  </div>
                 </motion.div>
               ))}
             </div>
-          </div>
-          
-          {/* Additional Features */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white p-4 sm:p-5 md:p-6 rounded-xl border border-gray-200 hover:border-blue-400 transition-colors shadow-sm"
-            >
-              <h4 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 flex items-center gap-2 text-gray-800">
-                <span className="text-blue-500">✦</span> Development Approach
-              </h4>
-              <p className="text-sm sm:text-base text-gray-600">
-                Component-driven architecture with emphasis on performance, accessibility, and clean code. I follow best practices in testing, documentation, and CI/CD pipelines.
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              viewport={{ once: true }}
-              className="bg-white p-4 sm:p-5 md:p-6 rounded-xl border border-gray-200 hover:border-purple-400 transition-colors shadow-sm"
-            >
-              <h4 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 flex items-center gap-2 text-gray-800">
-                <span className="text-purple-500">✦</span> Continuous Learning
-              </h4>
-              <p className="text-sm sm:text-base text-gray-600">
-                Dedicated to staying current with industry trends through courses, conferences, and open-source contributions. I enjoy solving problems on platforms like LeetCode and Codewars.
-              </p>
-            </motion.div>
-          </div>
-        </motion.div>
-      </div>
-    </motion.section>
-  );
-};
 
-export default About;
+            {/* TIMELINE */}
+            <div className="mt-12">
+              <h3 className="text-xl font-bold mb-4 text-gray-800">
+                My Journey
+              </h3>
+              <ul className="space-y-3">
+                {timeline.map((item, i) => (
+                  <li key={i} className="flex gap-3 text-gray-600">
+                    <span className="font-bold text-blue-500">{item.year}</span>
+                    <span>{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+
+          {/* RIGHT */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            {/* DESCRIPTION */}
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              I’m a full-stack developer who enjoys turning complex problems into
+              elegant, scalable systems. I care deeply about code quality,
+              performance, and user experience.
+            </p>
+
+            <p className="text-lg text-gray-600 leading-relaxed mb-10">
+              I work across frontend, backend, and databases — always aiming to
+              build software that is maintainable, efficient, and impactful.
+            </p>
+
+            {/* SKILLS */}
+            <div className="space-y-8">
+              {skillGroups.map((group, i) => (
+                <div key={i}>
+                  <h3 className="flex items-center gap-2 text-xl font-bold text-gray-800 mb-4">
+                    <span className="text-blue-500">{group.icon}</span>
+                    {group.title}
+                  </h3>
+
+                  <div className="flex flex-wrap gap-3">
+                    {group.skills.map((skill) => (
+                      <motion.div
+                        key={skill.name}
+                        whileHover={{ scale: 1.1, y: -4 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                        className="relative group flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm text-sm"
+                      >
+                        <span className="text-lg">{skill.icon}</span>
+                        {skill.name}
+
+                        {/* Tooltip */}
+                        <span className="absolute bottom-full mb-2 px-3 py-1 text-xs bg-gray-900 text-white rounded opacity-0 group-hover:opacity-100 transition">
+                          {skill.tip}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* PRINCIPLES */}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="mt-14 p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-100"
+            >
+              <h4 className="text-xl font-bold mb-4 text-gray-800">
+                How I Build Software
+              </h4>
+              <ul className="space-y-2 text-gray-600">
+                {principles.map((p, i) => (
+                  <li key={i}>✔ {p}</li>
+                ))}
+              </ul>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
