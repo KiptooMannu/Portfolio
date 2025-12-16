@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 import { FaReact, FaNodeJs, FaAws } from "react-icons/fa";
 import {
@@ -10,7 +10,6 @@ import {
   SiPostgresql
 } from "react-icons/si";
 
-/* 🔹 Local project screenshots */
 import autoSeatImage from "../assets/Auto.png";
 import cemaImage from "../assets/Cema.png";
 import churchImage from "../assets/Church.png";
@@ -27,7 +26,16 @@ interface Project {
   image: string;
 }
 
+const categoryColors: Record<string, string> = {
+  "Transport Tech": "bg-blue-100 text-blue-600",
+  "Health Tech": "bg-green-100 text-green-600",
+  "Web Development": "bg-purple-100 text-purple-600",
+  "Rental Platform": "bg-yellow-100 text-yellow-600",
+};
+
 const Projects = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   const projects: Project[] = [
     {
       title: "AutoSeat PSV",
@@ -40,12 +48,11 @@ const Projects = () => {
         "Real-time seat booking",
         "Admin dashboard",
         "Payment integration",
-        "Booking analytics"
+        "Booking analytics",
       ],
       category: "Transport Tech",
-      image: autoSeatImage
+      image: autoSeatImage,
     },
-
     {
       title: "CEMA Health Management System",
       description:
@@ -57,12 +64,11 @@ const Projects = () => {
         "Client registration & demographics",
         "Health program management",
         "Patient enrollment tracking",
-        "Secure data handling"
+        "Secure data handling",
       ],
       category: "Health Tech",
-      image: cemaImage
+      image: cemaImage,
     },
-
     {
       title: "Kapsomoita Church Website",
       description:
@@ -74,12 +80,11 @@ const Projects = () => {
         "Responsive design",
         "Service & event listings",
         "Modern UI/UX",
-        "Fast deployment"
+        "Fast deployment",
       ],
       category: "Web Development",
-      image: churchImage
+      image: churchImage,
     },
-
     {
       title: "Car Vehicle Rental System",
       description:
@@ -91,11 +96,11 @@ const Projects = () => {
         "Vehicle browsing & filtering",
         "Car booking based on preferences",
         "Booking history & tracking",
-        "Responsive user interface"
+        "Responsive user interface",
       ],
       category: "Rental Platform",
-      image: vehicleRentalImage
-    }
+      image: vehicleRentalImage,
+    },
   ];
 
   const getTechIcon = (tech: string) => {
@@ -130,7 +135,7 @@ const Projects = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="min-h-screen py-20 bg-white"
+      className="min-h-screen py-20 bg-white relative"
     >
       {/* Header */}
       <div className="text-center mb-16 px-4">
@@ -149,11 +154,11 @@ const Projects = () => {
             key={index}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
+            transition={{ duration: 0.5, delay: index * 0.15 }}
             viewport={{ once: true }}
-            className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition"
+            whileHover={!prefersReducedMotion ? { scale: 1.03, rotate: 1 } : {}}
+            className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-transform"
           >
-            {/* Image */}
             <div className="h-48 overflow-hidden">
               <img
                 src={project.image}
@@ -162,22 +167,24 @@ const Projects = () => {
               />
             </div>
 
-            {/* Content */}
             <div className="p-6">
               <div className="flex justify-between items-start mb-3">
                 <h3 className="text-xl font-bold text-gray-800">
                   {project.title}
                 </h3>
-                <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
+                <span
+                  className={`text-xs px-2 py-1 rounded-full ${
+                    categoryColors[project.category] || "bg-gray-100 text-gray-700"
+                  }`}
+                >
                   {project.category}
                 </span>
               </div>
 
-              <p className="text-gray-600 mb-4 text-sm">
-                {project.description}
-              </p>
+              <p className="text-gray-600 mb-4 text-sm">{project.description}</p>
 
-              <ul className="mb-4 space-y-1">
+              {/* Features */}
+              <ul className="mb-4 space-y-1 max-h-24 overflow-hidden group-hover:max-h-80 transition-all duration-500">
                 {project.features.map((feature, i) => (
                   <li key={i} className="text-sm text-gray-600 flex">
                     <span className="mr-2 text-blue-500">•</span>
@@ -189,13 +196,16 @@ const Projects = () => {
               {/* Tech stack */}
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.techStack.map((tech, i) => (
-                  <span
+                  <motion.span
                     key={i}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
                     className="flex items-center gap-1 px-2 py-1 text-xs bg-gray-100 rounded-full"
                   >
                     {getTechIcon(tech)}
                     {tech}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
 
@@ -205,7 +215,7 @@ const Projects = () => {
                   href={project.liveLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline flex items-center text-sm"
+                  className="text-blue-600 hover:underline flex items-center text-sm transition-transform hover:scale-105"
                 >
                   Live <FiExternalLink className="ml-1" />
                 </a>
@@ -213,7 +223,7 @@ const Projects = () => {
                   href={project.githubLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-700 hover:underline flex items-center text-sm"
+                  className="text-gray-700 hover:underline flex items-center text-sm transition-transform hover:scale-105"
                 >
                   GitHub <FiGithub className="ml-1" />
                 </a>
