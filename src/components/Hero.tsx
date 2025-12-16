@@ -103,14 +103,16 @@ export default function Hero() {
 
           {/* CTA */}
           <div className="flex gap-4 mt-10">
-            <a
-              href={import.meta.env.VITE_RESUME_URL}
-              download
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium shadow-lg hover:shadow-xl transition"
-            >
-              <FiDownload className="inline mr-2" />
-              Resume
-            </a>
+           <a
+  href="https://drive.google.com/file/d/1YVDPKJ4OYFYeInogbnj6WzmAWNwQEQa-/view?usp=drive_link"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium shadow-lg hover:shadow-xl transition flex items-center gap-2"
+>
+  <FiDownload />
+  View Resume
+</a>
+
 
             <a
               href="#contact"
