@@ -2,6 +2,7 @@ export { default as Header } from './Header';
 export { default as Hero } from './Hero';
 export { default as About } from './About';
 export { default as Terminal } from './Terminal';
+export { default as Stats } from './Stats';
 export { default as Experience } from './Experience';
 export { default as Credentials } from './Credentials';
 export { default as Projects } from './Projects';

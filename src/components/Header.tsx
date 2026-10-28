@@ -24,6 +24,7 @@ const Header = ({ activeSection, setActiveSection }: HeaderProps) => {
   const navItems = [
     { name: "Home", id: "home" },
     { name: "About", id: "about" },
+    { name: "Stats", id: "stats" },
     { name: "Experience", id: "experience" },
     { name: "Credentials", id: "credentials" },
     { name: "Projects", id: "projects" },

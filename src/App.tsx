@@ -1,4 +1,4 @@
-import { Header, Hero, About, Terminal, Experience, Credentials, Projects, Contact, Footer } from './components/Index';
+import { Header, Hero, About, Stats, Experience, Credentials, Projects, Contact, Footer } from './components/Index';
 import { useState } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -11,6 +11,7 @@ const PortfolioContent = () => {
       <main className="flex-1 w-full">
         <Hero />
         <About />
+        <Stats />
         <Experience />
         <Credentials />
         <Projects />

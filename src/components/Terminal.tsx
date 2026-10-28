@@ -83,13 +83,8 @@ export default function Terminal({ embedded = false }: { embedded?: boolean }) {
 
   useEffect(() => {
     if (terminalLogRef.current && history.length > 0) {
-      const latestEl = terminalLogRef.current.querySelector<HTMLElement>("#latest-cmd-entry");
-      if (latestEl) {
-        terminalLogRef.current.scrollTo({
-          top: latestEl.offsetTop - terminalLogRef.current.offsetTop - 12,
-          behavior: "smooth",
-        });
-      }
+      const el = terminalLogRef.current;
+      el.scrollTop = el.scrollHeight;
     }
   }, [history]);
 
