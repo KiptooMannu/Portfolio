@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiMapPin, FiPhone, FiExternalLink } from "react-icons/fi";
+import { motion, useReducedMotion } from "framer-motion";
+import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiMapPin, FiPhone, FiSend, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import { ReactElement, useState } from "react";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 interface SocialLink {
   icon: ReactElement;
@@ -10,25 +10,26 @@ interface SocialLink {
 }
 
 const Contact = () => {
+  const prefersReducedMotion = useReducedMotion();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   const socialLinks: SocialLink[] = [
     { icon: <FiGithub />, name: "GitHub", link: "https://github.com/KiptooMannu" },
-    { icon: <FiLinkedin />, name: "LinkedIn", link: "https://linkedin.com/in/yourusername" },
+    { icon: <FiLinkedin />, name: "LinkedIn", link: "https://www.linkedin.com/in/kiptoo-emmanuel-726893262" },
     { icon: <FiTwitter />, name: "Twitter", link: "https://x.com/EmmanuelKi82897?s=09" },
-    { icon: <FiMail />, name: "Email", link: "mailto:kiptooemmanuel763@gmail.com" },
+    { icon: <FiMail />, name: "Email", link: "mailto:Kiptooemmanuel763@gmail.com" },
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,178 +40,183 @@ const Contact = () => {
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
-      console.error('EmailJS environment variables are not properly configured');
-      setSubmitStatus('error');
+      console.error("EmailJS environment variables are not properly configured");
+      setSubmitStatus("error");
       return;
     }
 
     setIsSubmitting(true);
-    setSubmitStatus('idle');
+    setSubmitStatus("idle");
 
     try {
       await emailjs.send(
         serviceId,
         templateId,
         {
-          to_email: 'kiptooemmanuel763@gmail.com',
+          to_email: "kiptooemmanuel763@gmail.com",
           from_name: formData.name,
           from_email: formData.email,
           subject: formData.subject,
           message: `From: ${formData.name} <${formData.email}>\n\nMessage:\n${formData.message}`,
-          reply_to: formData.email
+          reply_to: formData.email,
         },
         publicKey
       );
 
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
-      console.error('Error sending email:', error);
-      setSubmitStatus('error');
+      console.error("Error sending email:", error);
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <motion.section
+    <section
       id="contact"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true, margin: "-100px" }}
-      className="min-h-screen py-12 md:py-20 lg:py-24 flex flex-col justify-center scroll-mt-20 bg-white"
+      className="relative py-24 bg-slate-50/50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-900 overflow-hidden transition-colors duration-300"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Background ambient lighting */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-1/3 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-[130px]"
+      />
+
+      <div className="relative max-w-6xl mx-auto px-6 md:px-8">
         {/* Header Section */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16 px-4"
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-2xl mx-auto mb-16"
         >
-          <motion.h2
-            whileInView={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600"
-          >
-            Contact Me
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-xs sm:max-w-sm md:max-w-xl lg:max-w-2xl mx-auto"
-          >
-            Let's build something amazing together
-          </motion.p>
+          <span className="text-xs font-semibold uppercase tracking-widest text-sky-600 dark:text-sky-400 mb-2 inline-block">
+            Start a Conversation
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Get In Touch
+          </h2>
+          <p className="mt-3 text-slate-600 dark:text-slate-400 text-base sm:text-lg">
+            Whether you have an upcoming project, architecture questions, or full-time opportunities, my inbox is open.
+          </p>
         </motion.div>
 
-        {/* Main Content */}
-        <div className="flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 px-4 sm:px-6 md:px-8 lg:px-10">
-          
-          {/* Contact Info Card */}
+        {/* Content Layout */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Direct Contact Channels */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1)" }}
-            transition={{ duration: 0.4 }}
             viewport={{ once: true }}
-            className="lg:w-1/3 bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all p-6 sm:p-8"
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-5 p-7 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 shadow-sm dark:shadow-none flex flex-col justify-between"
           >
-            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-800">Get In Touch</h3>
-            
-            <div className="space-y-5">
-              {/* Location */}
-              <div className="flex items-start gap-4">
-                <div className="p-2 bg-blue-50 rounded-lg text-blue-500">
-                  <FiMapPin className="text-xl" />
-                </div>
-                <div>
-                  <h4 className="text-base sm:text-lg font-medium text-gray-700">Location</h4>
-                  <p className="text-gray-600 text-sm sm:text-base">Nairobi, Kenya</p>
-                </div>
-              </div>
+            <div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+                Contact Information
+              </h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                Reach out directly via email, phone, or schedule an engineering consultation.
+              </p>
 
-              {/* Email */}
-              <div className="flex items-start gap-4">
-                <div className="p-2 bg-blue-50 rounded-lg text-blue-500">
-                  <FiMail className="text-xl" />
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-indigo-600 dark:text-indigo-400 shrink-0">
+                    <FiMapPin className="text-lg" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      Location
+                    </h4>
+                    <p className="text-sm font-medium text-slate-800 dark:text-slate-200 mt-0.5">
+                      Nairobi, Kenya
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-base sm:text-lg font-medium text-gray-700">Email</h4>
-                  <a 
-                    href="mailto:kiptooemmanuel763@gmail.com" 
-                    className="text-blue-600 hover:text-blue-700 text-sm sm:text-base transition-colors"
-                  >
-                    kiptooemmanuel763@gmail.com
-                  </a>
-                </div>
-              </div>
 
-              {/* Phone */}
-              <div className="flex items-start gap-4">
-                <div className="p-2 bg-blue-50 rounded-lg text-blue-500">
-                  <FiPhone className="text-xl" />
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-indigo-600 dark:text-indigo-400 shrink-0">
+                    <FiMail className="text-lg" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      Email
+                    </h4>
+                    <a
+                      href="mailto:kiptooemmanuel763@gmail.com"
+                      className="text-sm font-medium text-slate-800 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-sky-400 transition-colors mt-0.5 block break-all"
+                    >
+                      kiptooemmanuel763@gmail.com
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-base sm:text-lg font-medium text-gray-700">Phone</h4>
-                  <a 
-                    href="tel:+254113897004" 
-                    className="text-blue-600 hover:text-blue-700 text-sm sm:text-base transition-colors"
-                  >
-                    (+254)113897004
-                  </a>
+
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-indigo-600 dark:text-indigo-400 shrink-0">
+                    <FiPhone className="text-lg" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      Phone / WhatsApp
+                    </h4>
+                    <a
+                      href="tel:+254113897004"
+                      className="text-sm font-medium text-slate-800 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-sky-400 transition-colors mt-0.5 block"
+                    >
+                      (+254) 113 897 004
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="mt-8 pt-6 border-t border-gray-100">
-              <h4 className="text-base sm:text-lg font-medium text-gray-700 mb-4">Connect With Me</h4>
-              <div className="flex flex-wrap gap-3">
+            {/* Social channels */}
+            <div className="mt-10 pt-8 border-t border-slate-200 dark:border-slate-800/80">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3.5">
+                Social Profiles
+              </h4>
+              <div className="flex flex-wrap gap-2.5">
                 {socialLinks.map((social) => (
                   <motion.a
                     key={social.name}
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ y: -3 }}
+                    whileHover={!prefersReducedMotion ? { y: -2, scale: 1.05 } : {}}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-1.5 px-3 py-2 bg-gray-50 hover:bg-blue-50 text-gray-700 hover:text-blue-600 rounded-lg text-sm sm:text-base transition-all"
-                    aria-label={social.name}
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white text-xs font-medium transition-colors shadow-xs dark:shadow-none"
                   >
-                    {social.icon}
-                    <span className="hidden sm:inline">{social.name}</span>
+                    <span>{social.icon}</span>
+                    <span>{social.name}</span>
                   </motion.a>
                 ))}
               </div>
             </div>
           </motion.div>
 
-          {/* Contact Form Card */}
+          {/* Message Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1)" }}
-            transition={{ duration: 0.4, delay: 0.1 }}
             viewport={{ once: true }}
-            className="lg:w-2/3 bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all p-6 sm:p-8"
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-7 p-7 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 shadow-sm dark:shadow-none"
           >
-            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-800">Send Me a Message</h3>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+              Send a Direct Message
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
+              Fill out the form below and I'll respond within 24 hours.
+            </p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                >
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name *
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                    Your Name *
                   </label>
                   <input
                     type="text"
@@ -219,15 +225,13 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm sm:text-base"
+                    placeholder="e.g. Sarah Connor"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
                   />
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 }}
-                >
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
                     Email Address *
                   </label>
                   <input
@@ -237,17 +241,14 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm sm:text-base"
+                    placeholder="sarah@example.com"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
                   />
-                </motion.div>
+                </div>
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+              <div>
+                <label htmlFor="subject" className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
                   Subject *
                 </label>
                 <input
@@ -257,16 +258,13 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm sm:text-base"
+                  placeholder="Project inquiry / Full-time role"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all"
                 />
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.25 }}
-              >
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+              <div>
+                <label htmlFor="message" className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
                   Message *
                 </label>
                 <textarea
@@ -276,39 +274,52 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm sm:text-base"
-                ></textarea>
-              </motion.div>
+                  placeholder="Tell me about your goals, timelines, or specifications..."
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all resize-y"
+                />
+              </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                <div className="w-full sm:w-auto">
-                  {submitStatus === 'success' && (
-                    <p className="text-green-600 font-medium text-sm sm:text-base">Message sent successfully!</p>
-                  )}
-                  {submitStatus === 'error' && (
-                    <p className="text-red-600 font-medium text-sm sm:text-base">Failed to send message. Please try again.</p>
-                  )}
-                </div>
+              {/* Status Alert Banner */}
+              {submitStatus === "success" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs flex items-center gap-2"
+                >
+                  <FiCheckCircle className="text-base shrink-0 text-emerald-600 dark:text-emerald-400" />
+                  <span>Message sent successfully! I will reply shortly.</span>
+                </motion.div>
+              )}
+
+              {submitStatus === "error" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/70 border border-rose-200 dark:border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2"
+                >
+                  <FiAlertCircle className="text-base shrink-0 text-rose-600 dark:text-rose-400" />
+                  <span>Unable to send through the form. Please reach out directly to kiptooemmanuel763@gmail.com</span>
+                </motion.div>
+              )}
+
+              <div className="pt-2">
                 <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  aria-busy={isSubmitting}
-                  className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg shadow-sm hover:shadow-md transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base"
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-md shadow-indigo-600/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
                 >
                   {isSubmitting ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Sending...
-                    </span>
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                      <span>Sending Message...</span>
+                    </>
                   ) : (
-                    <span className="flex items-center justify-center gap-2">
-                      Send Message <FiExternalLink className="text-lg" />
-                    </span>
+                    <>
+                      <span>Send Message</span>
+                      <FiSend className="text-sm" />
+                    </>
                   )}
                 </motion.button>
               </div>
@@ -316,9 +327,8 @@ const Contact = () => {
           </motion.div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
 export default Contact;
-            

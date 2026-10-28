@@ -1,156 +1,180 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   SiJavascript,
   SiTypescript,
   SiReact,
-  SiNextdotjs,
+  SiAngular,
   SiNodedotjs,
   SiTailwindcss,
   SiPython,
   SiPostgresql,
   SiMongodb,
-  SiGithub,
-  SiFirebase,
+  SiApachekafka,
+  SiDocker,
+  SiSpringboot,
 } from "react-icons/si";
-import { FaCode, FaServer, FaDatabase } from "react-icons/fa";
+import { FaJava, FaServer, FaShieldAlt, FaGraduationCap, FaCheckCircle } from "react-icons/fa";
 import profileImage from "../assets/Hack.jpg";
-
-/* ---------------------------------- */
-/* CONFIG                             */
-/* ---------------------------------- */
 
 const skillGroups = [
   {
-    title: "Frontend",
-    icon: <FaCode />,
+    title: "Backend Frameworks & Messaging",
+    icon: <FaServer className="text-emerald-500 dark:text-emerald-400" />,
     skills: [
-      { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" />, tip: "ES6+, async patterns, performance" },
-      { name: "TypeScript", icon: <SiTypescript className="text-blue-500" />, tip: "Type safety, scalable apps" },
-      { name: "React", icon: <SiReact className="text-blue-400" />, tip: "Hooks, state management" },
-      { name: "Next.js", icon: <SiNextdotjs />, tip: "SSR, routing, SEO" },
-      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-cyan-400" />, tip: "Responsive UI systems" },
+      { name: "Java", icon: <FaJava className="text-amber-500" />, tip: "Core enterprise Java & OOP" },
+      { name: "Spring Boot", icon: <SiSpringboot className="text-emerald-500" />, tip: "Microservices, REST APIs & security" },
+      { name: "Node.js & Express", icon: <SiNodedotjs className="text-emerald-500" />, tip: "Async APIs & middleware" },
+      { name: "Apache Kafka", icon: <SiApachekafka className="text-rose-500" />, tip: "Event-driven asynchronous messaging" },
+      { name: "Python", icon: <SiPython className="text-blue-500" />, tip: "Automation & Django services" },
     ],
   },
   {
-    title: "Backend",
-    icon: <FaServer />,
+    title: "Frontend & Architecture",
+    icon: <SiAngular className="text-rose-500 dark:text-rose-400" />,
     skills: [
-      { name: "Node.js", icon: <SiNodedotjs className="text-green-500" />, tip: "APIs, authentication" },
-      { name: "Python", icon: <SiPython className="text-blue-600" />, tip: "Automation, scripting" },
-      { name: "Firebase", icon: <SiFirebase className="text-yellow-500" />, tip: "Auth, real-time DB" },
+      { name: "Angular", icon: <SiAngular className="text-rose-500" />, tip: "Enterprise single-page apps & TypeScript" },
+      { name: "React.js", icon: <SiReact className="text-sky-400" />, tip: "Component architecture, hooks & Redux" },
+      { name: "TypeScript", icon: <SiTypescript className="text-blue-500" />, tip: "Strict type systems & contract safety" },
+      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-cyan-400" />, tip: "Responsive design tokens & UI polish" },
+      { name: "JavaScript (ES6+)", icon: <SiJavascript className="text-yellow-400" />, tip: "Modern async patterns & browser APIs" },
     ],
   },
   {
-    title: "Database & Tools",
-    icon: <FaDatabase />,
+    title: "Databases, Cloud & Security",
+    icon: <FaShieldAlt className="text-indigo-500 dark:text-indigo-400" />,
     skills: [
-      { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-700" />, tip: "Relational data modeling" },
-      { name: "MongoDB", icon: <SiMongodb className="text-green-600" />, tip: "NoSQL schemas" },
-      { name: "Git & GitHub", icon: <SiGithub className="text-gray-800" />, tip: "Collaboration & CI" },
+      { name: "PostgreSQL", icon: <SiPostgresql className="text-sky-500" />, tip: "Optimized schemas, indexing & sub-second queries" },
+      { name: "MongoDB", icon: <SiMongodb className="text-emerald-500" />, tip: "Document schemas & aggregations" },
+      { name: "Docker & CI/CD", icon: <SiDocker className="text-blue-400" />, tip: "Containerization & automated pipelines" },
+      { name: "OAuth 2.0 & JWT", icon: <FaShieldAlt className="text-indigo-400" />, tip: "RBAC, encryption & Data Protection Act" },
     ],
   },
 ];
 
 const stats = [
-  { value: "4+", label: "Production Projects" },
-  { value: "1+", label: "Years Experience" },
-  { value: "100%", label: "Quality Mindset" },
-  { value: "∞", label: "Continuous Learning" },
+  { value: "2+ Years", label: "Enterprise Experience" },
+  { value: "1,000+", label: "Concurrent Users Handled" },
+  { value: "40%", label: "DB Speed Optimization" },
+  { value: "85%", label: "Code Coverage Standards" },
 ];
 
 const timeline = [
-  { year: "2023", text: "Started deep focus on full-stack development" },
-  { year: "2024", text: "Built and deployed scalable real-world apps" },
-  { year: "2025", text: "Specializing in cloud-ready web solutions" },
+  { year: "2021 - 2025", text: "BSc in Software Engineering at Kirinyaga University (Second Class Upper Honours)." },
+  { year: "May - July 2023", text: "Networking Intern at Tenwek Hospital administering enterprise healthcare infrastructure." },
+  { year: "May - August 2024", text: "Software Developer Intern at Teach2Give engineering REST APIs & caching solutions." },
+  { year: "March 2026 - Present", text: "Full Stack Developer (Apprenticeship) at Eclectics International Limited." },
 ];
 
 const principles = [
-  "Clean, scalable architecture",
-  "Performance & accessibility first",
-  "Readable, maintainable code",
-  "Continuous improvement mindset",
+  "API-first design, microservices architecture, and asynchronous event streams",
+  "Strict adherence to OWASP security guidelines, OAuth 2.0, and data protection standards",
+  "Sub-second database performance through disciplined query profiling and indexing",
+  "Automated CI/CD pipelines with comprehensive unit and integration testing",
 ];
 
-/* ---------------------------------- */
-/* COMPONENT                          */
-/* ---------------------------------- */
-
 export default function About() {
-  // const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
       id="about"
-      className="relative py-24 bg-gradient-to-b from-white to-slate-50 overflow-hidden"
+      className="relative py-24 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-900 overflow-hidden transition-colors duration-300"
     >
-      {/* Background Accent */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#6366f120,transparent_40%)]" />
+      {/* Background ambient lighting */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-1/3 left-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-[100px]"
+      />
 
-      <div className="relative max-w-6xl mx-auto px-6">
-
-        {/* HEADER */}
+      <div className="relative max-w-6xl mx-auto px-6 md:px-8">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-2xl mx-auto mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+          <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-2 inline-block">
+            Professional Profile
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             About Me
           </h2>
-          <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-            A developer focused on building scalable, clean, and meaningful digital solutions.
+          <p className="mt-3 text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed">
+            Full Stack Developer with 2+ years of experience architecting and maintaining enterprise-grade, scalable financial applications.
           </p>
         </motion.div>
 
-        {/* MAIN GRID */}
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-
-          {/* LEFT */}
+        {/* Main Grid */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Portrait, Education & Verified Metrics */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5 flex flex-col"
           >
-            {/* IMAGE */}
-            <div className="relative w-64 h-64 mx-auto mb-10">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 blur-xl opacity-30" />
+            {/* Image Card */}
+            <div className="relative w-48 h-48 sm:w-56 sm:h-56 mx-auto mb-8">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-indigo-500/20 to-sky-500/20 blur-lg" />
               <img
                 src={profileImage}
-                alt="Emmanuel Kiptoo"
-                className="relative w-full h-full rounded-full object-cover border-4 border-white shadow-xl"
+                alt="Emmanuel Kiptoo Coding"
+                className="relative w-full h-full rounded-2xl object-cover border border-slate-200 dark:border-slate-800 shadow-lg dark:shadow-xl"
               />
             </div>
 
-            {/* STATS */}
-            <div className="grid grid-cols-2 gap-4">
+            {/* Education Spotlight Card */}
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-50/70 to-slate-50 dark:from-indigo-950/40 dark:to-slate-900/50 border border-indigo-200 dark:border-indigo-900/50 mb-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 rounded-lg bg-indigo-600 text-white shrink-0">
+                  <FaGraduationCap className="text-lg" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white leading-tight">
+                    Kirinyaga University
+                  </h3>
+                  <p className="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">
+                    Bachelor of Science in Software Engineering
+                  </p>
+                </div>
+              </div>
+              <p className="text-xs text-slate-600 dark:text-slate-300 pl-11">
+                Graduated with <span className="font-semibold text-slate-800 dark:text-slate-100">Second Class Upper Division (Honours)</span> · 2021 - 2025
+              </p>
+            </div>
+
+            {/* Verified Metrics */}
+            <div className="grid grid-cols-2 gap-3.5 mb-8">
               {stats.map((stat, i) => (
                 <motion.div
                   key={i}
-                  whileHover={{ scale: 1.05 }}
-                  className="p-4 rounded-xl bg-white border border-gray-200 text-center shadow-sm"
+                  whileHover={!prefersReducedMotion ? { y: -2, scale: 1.02 } : {}}
+                  className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 text-center hover:border-indigo-400 dark:hover:border-slate-700 transition-colors shadow-sm"
                 >
-                  <div className="text-2xl font-bold text-blue-500">
+                  <div className="text-xl sm:text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-gray-600">
+                  <div className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">
                     {stat.label}
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* TIMELINE */}
-            <div className="mt-12">
-              <h3 className="text-xl font-bold mb-4 text-gray-800">
-                My Journey
+            {/* Career Milestones */}
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/60 shadow-sm">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-800 dark:text-slate-300 mb-4">
+                Career Timeline
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {timeline.map((item, i) => (
-                  <li key={i} className="flex gap-3 text-gray-600">
-                    <span className="font-bold text-blue-500">{item.year}</span>
+                  <li key={i} className="flex gap-3 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+                    <span className="font-mono font-bold text-sky-600 dark:text-sky-400 shrink-0">
+                      {item.year}
+                    </span>
                     <span>{item.text}</span>
                   </li>
                 ))}
@@ -158,49 +182,45 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* RIGHT */}
+          {/* Right Column: Bio, Skills & Principles */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7 flex flex-col space-y-8"
           >
-            {/* DESCRIPTION */}
-            <p className="text-lg text-gray-600 leading-relaxed mb-6">
-              I’m a full-stack developer who enjoys turning complex problems into
-              elegant, scalable systems. I care deeply about code quality,
-              performance, and user experience.
-            </p>
+            {/* Core Narrative */}
+            <div className="space-y-4 text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+              <p>
+                I am a Full Stack Developer with 2+ years of hands-on experience designing, developing, and deploying enterprise-grade financial software solutions. Proven track record leading the full development lifecycle from responsive user interfaces in Angular and React to high-throughput backend services in Spring Boot and Node.js.
+              </p>
+              <p>
+                Specializing in secure, cloud-native deployments across AWS and Azure, I leverage microservices, event-driven architecture with Apache Kafka and Azure Service Bus, and containerization with Docker and Kubernetes to deliver sub-100ms response times for mission-critical operations.
+              </p>
+            </div>
 
-            <p className="text-lg text-gray-600 leading-relaxed mb-10">
-              I work across frontend, backend, and databases — always aiming to
-              build software that is maintainable, efficient, and impactful.
-            </p>
-
-            {/* SKILLS */}
-            <div className="space-y-8">
+            {/* Skill Clusters */}
+            <div className="space-y-6 pt-2">
               {skillGroups.map((group, i) => (
-                <div key={i}>
-                  <h3 className="flex items-center gap-2 text-xl font-bold text-gray-800 mb-4">
-                    <span className="text-blue-500">{group.icon}</span>
-                    {group.title}
-                  </h3>
+                <div key={i} className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800/80 shadow-sm">
+                  <div className="flex items-center gap-2.5 mb-3.5">
+                    <span className="text-base">{group.icon}</span>
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                      {group.title}
+                    </h3>
+                  </div>
 
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2.5">
                     {group.skills.map((skill) => (
                       <motion.div
                         key={skill.name}
-                        whileHover={{ scale: 1.1, y: -4 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                        className="relative group flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm text-sm"
+                        title={skill.tip}
+                        whileHover={!prefersReducedMotion ? { y: -2, scale: 1.05 } : {}}
+                        className="relative group flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white hover:border-indigo-300 dark:hover:border-slate-700 transition-colors shadow-sm dark:shadow-none cursor-help"
                       >
-                        <span className="text-lg">{skill.icon}</span>
-                        {skill.name}
-
-                        {/* Tooltip */}
-                        <span className="absolute bottom-full mb-2 px-3 py-1 text-xs bg-gray-900 text-white rounded opacity-0 group-hover:opacity-100 transition">
-                          {skill.tip}
-                        </span>
+                        <span className="text-sm">{skill.icon}</span>
+                        <span>{skill.name}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -208,20 +228,20 @@ export default function About() {
               ))}
             </div>
 
-            {/* PRINCIPLES */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="mt-14 p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-100"
-            >
-              <h4 className="text-xl font-bold mb-4 text-gray-800">
-                How I Build Software
+            {/* Core Engineering Standards */}
+            <div className="p-6 rounded-2xl bg-indigo-50/70 dark:bg-gradient-to-br dark:from-indigo-950/30 dark:to-slate-900/40 border border-indigo-100 dark:border-indigo-900/40 shadow-sm">
+              <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300 mb-3.5">
+                Architecture & Engineering Standards
               </h4>
-              <ul className="space-y-2 text-gray-600">
-                {principles.map((p, i) => (
-                  <li key={i}>✔ {p}</li>
+              <ul className="space-y-2.5">
+                {principles.map((principle, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300 leading-normal">
+                    <FaCheckCircle className="text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
+                    <span>{principle}</span>
+                  </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>

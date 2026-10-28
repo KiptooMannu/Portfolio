@@ -1,522 +1,236 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { FiDownload, FiGithub, FiLinkedin, FiMail, FiArrowRight } from "react-icons/fi";
-import {
-  FaReact, FaNodeJs, FaDocker, FaAws, FaJava,
-} from "react-icons/fa";
-import {
-  SiNextdotjs, SiTailwindcss, SiTypescript,
-  SiSpringboot, SiPostgresql, SiAngular,
-} from "react-icons/si";
-import { useEffect, useState, useRef } from "react";
+import { FiDownload, FiGithub, FiLinkedin, FiMail, FiArrowRight, FiMapPin, FiShield, FiTerminal } from "react-icons/fi";
+import { useEffect, useState } from "react";
 import profileImage from "../assets/Mannu1.jpeg";
-
-/* ─────────────────────────────────────────────
-   CONFIG
-───────────────────────────────────────────── */
+import Terminal from "./Terminal";
 
 const ROLES = [
   "Full Stack Developer",
-  "Spring Boot Engineer",
-  "React & Next.js Specialist",
-  "Cloud & DevOps Enthusiast",
+  "Fintech & Digital Banking Specialist",
+  "Spring Boot & Microservices Engineer",
+  "Angular & React Specialist",
 ];
 
 const SOCIALS = [
   {
-    icon: <FiGithub />,
+    icon: <FiGithub className="text-lg" />,
     url: "https://github.com/KiptooMannu",
     label: "GitHub",
   },
   {
-    icon: <FiLinkedin />,
-    url: "https://linkedin.com/in/KiptooMannu",
+    icon: <FiLinkedin className="text-lg" />,
+    url: "https://www.linkedin.com/in/kiptoo-emmanuel-726893262",
     label: "LinkedIn",
   },
   {
-    icon: <FiMail />,
-    url: "mailto:kkgg7241@gmail.com",
+    icon: <FiMail className="text-lg" />,
+    url: "mailto:Kiptooemmanuel763@gmail.com",
     label: "Email",
   },
 ];
 
-const TECH_STACK = [
-  { icon: <FaReact />, label: "React", color: "#61DAFB" },
-  { icon: <SiAngular />, label: "Angular", color: "#DD0031" },
-  { icon: <SiNextdotjs />, label: "Next.js", color: "#000000" },
-  { icon: <SiTypescript />, label: "TypeScript", color: "#3178C6" },
-  { icon: <SiSpringboot />, label: "Spring Boot", color: "#6DB33F" },
-  { icon: <FaNodeJs />, label: "Node.js", color: "#339933" },
-  { icon: <SiPostgresql />, label: "PostgreSQL", color: "#4169E1" },
-  { icon: <SiTailwindcss />, label: "Tailwind", color: "#38BDF8" },
-  { icon: <FaDocker />, label: "Docker", color: "#2496ED" },
-  { icon: <FaAws />, label: "AWS", color: "#FF9900" },
-  { icon: <FaJava />, label: "Java", color: "#ED8B00" },
-];
-
-/* ─────────────────────────────────────────────
-   ANIMATION VARIANTS
-───────────────────────────────────────────── */
-
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 32 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay },
-});
-
-const fadeIn = (delay = 0) => ({
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { duration: 0.7, delay },
-});
-
-/* ─────────────────────────────────────────────
-   COMPONENT
-───────────────────────────────────────────── */
-
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
   const [roleIndex, setRoleIndex] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const sectionRef = useRef<HTMLElement>(null);
 
-  /* Role cycling */
   useEffect(() => {
-    const id = setInterval(
-      () => setRoleIndex((i) => (i + 1) % ROLES.length),
-      2800
-    );
-    return () => clearInterval(id);
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % ROLES.length);
+    }, 3200);
+    return () => clearInterval(interval);
   }, []);
-
-  /* Subtle parallax on mouse move */
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-    const handleMove = (e: MouseEvent) => {
-      const rect = sectionRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-      setMousePos({ x, y });
-    };
-    window.addEventListener("mousemove", handleMove);
-    return () => window.removeEventListener("mousemove", handleMove);
-  }, [prefersReducedMotion]);
 
   return (
     <section
-      ref={sectionRef}
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        background: "linear-gradient(to bottom right, #ffffff, #f8fafc, #eef2ff)",
-        fontFamily: "'Sora', 'DM Sans', sans-serif",
-      }}
+      className="relative min-h-[calc(100vh-80px)] flex flex-col justify-center overflow-hidden pt-8 pb-16 bg-slate-50/50 dark:bg-slate-950 transition-colors duration-300"
     >
-      {/* ── Ambient background orbs (adjusted for light theme) ── */}
+      {/* Ambient background glows */}
       <div
-        className="pointer-events-none absolute"
-        style={{
-          top: "10%", left: "5%",
-          width: 480, height: 480,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)",
-          filter: "blur(40px)",
-        }}
+        aria-hidden="true"
+        className="pointer-events-none absolute top-12 left-1/4 -translate-x-1/2 w-96 h-96 bg-indigo-500/10 dark:bg-indigo-600/15 rounded-full blur-[120px]"
       />
       <div
-        className="pointer-events-none absolute"
-        style={{
-          bottom: "8%", right: "6%",
-          width: 360, height: 360,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)",
-          filter: "blur(40px)",
-        }}
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-16 right-1/4 translate-x-1/3 w-[28rem] h-[28rem] bg-emerald-500/10 dark:bg-emerald-600/10 rounded-full blur-[140px]"
       />
 
-      {/* ── Fine dot grid (light) ── */}
+      {/* Background grid */}
       <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#cbd5e125_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e125_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]"
       />
 
-      {/* ══════════════════════════════════════════
-          MAIN GRID
-      ══════════════════════════════════════════ */}
-      <div className="relative z-10 max-w-6xl w-full px-6 md:px-10 grid md:grid-cols-2 gap-16 items-center py-24">
-
-        {/* ── LEFT COLUMN ── */}
-        <div className="flex flex-col">
-
-          {/* Availability pill - light theme */}
-          <motion.div {...fadeIn(0.1)} className="mb-7 self-start">
-            <span
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase"
-              style={{
-                background: "rgba(16,185,129,0.12)",
-                border: "1px solid rgba(16,185,129,0.3)",
-                color: "#059669",
-                letterSpacing: "0.1em",
-              }}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-8 w-full">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          {/* Left Column: Profile & Copy */}
+          <div className="lg:col-span-6 flex flex-col items-start">
+            {/* Availability Pill */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-semibold tracking-wide mb-5 shadow-sm"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Available for work
-            </span>
-          </motion.div>
-
-          {/* Headline - dark text */}
-          <motion.div {...fadeUp(0.15)}>
-            <p
-              className="text-sm font-semibold mb-2 tracking-widest uppercase"
-              style={{ color: "#6366f1" }}
-            >
-              Hello, World 👋
-            </p>
-            <h1
-              className="text-5xl md:text-6xl font-extrabold leading-[1.08] tracking-tight text-gray-900"
-            >
-              Emmanuel
-              <br />
-              <span
-                style={{
-                  background: "linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Kiptoo
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-            </h1>
-          </motion.div>
+              2+ Years Experience · Fintech & Digital Banking
+            </motion.div>
 
-          {/* Animated role */}
-          <motion.div
-            {...fadeUp(0.25)}
-            className="mt-5 h-8 overflow-hidden"
-          >
-            <motion.p
-              key={roleIndex}
+            {/* Profile Avatar Token */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex items-center gap-3.5 mb-5 p-2 pr-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
+              <img
+                src={profileImage}
+                alt="Emmanuel Kiptoo"
+                className="w-12 h-12 rounded-xl object-cover object-top border border-indigo-200 dark:border-indigo-500/30"
+              />
+              <div className="flex flex-col">
+                <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1">
+                  Emmanuel Kiptoo
+                  <FiShield className="text-sky-500 text-xs inline" />
+                </span>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                  Kirinyaga University Software Engineering (Honours)
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Main Heading */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              className="text-lg font-semibold text-gray-600"
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              {ROLES[roleIndex]}
-            </motion.p>
-          </motion.div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+                Engineering Scalable{" "}
+                <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-indigo-700 dark:from-sky-400 dark:via-indigo-300 dark:to-indigo-400 bg-clip-text text-transparent">
+                  Fintech Solutions
+                </span>
+              </h1>
+            </motion.div>
 
-          {/* Bio */}
-          <motion.p
-            {...fadeUp(0.32)}
-            className="mt-6 text-base leading-relaxed max-w-md text-gray-500"
-          >
-            I build scalable, high-performance web applications — from
-            pixel-perfect Angular & React frontends to robust Spring Boot APIs,
-            backed by PostgreSQL and deployed on the cloud. Based in{" "}
-            <span className="font-semibold text-gray-700">
-              Nairobi, Kenya 🇰🇪
-            </span>
-            .
-          </motion.p>
-
-          {/* Divider */}
-          <motion.div
-            {...fadeIn(0.38)}
-            className="mt-8 mb-6"
-            style={{
-              height: 1,
-              background:
-                "linear-gradient(90deg, rgba(59,130,246,0.5) 0%, transparent 100%)",
-              maxWidth: 320,
-            }}
-          />
-
-          {/* CTA Buttons - light theme */}
-          <motion.div {...fadeUp(0.42)} className="flex flex-wrap gap-4">
-            <a
-              href="https://drive.google.com/file/d/1YVDPKJ4OYFYeInogbnj6WzmAWNwQEQa-/view?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300"
-              style={{
-                background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
-                color: "#fff",
-                boxShadow: "0 0 20px rgba(59,130,246,0.3)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = "0 0 28px rgba(59,130,246,0.5)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = "0 0 20px rgba(59,130,246,0.3)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
+            {/* Role Ticker */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mt-3 h-8 overflow-hidden"
             >
-              <FiDownload className="text-base" />
-              View Resume
-            </a>
-
-            <a
-              href="#projects"
-              className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300"
-              style={{
-                border: "1px solid rgba(59,130,246,0.4)",
-                color: "#3b82f6",
-                background: "rgba(59,130,246,0.06)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(59,130,246,0.12)";
-                e.currentTarget.style.borderColor = "rgba(59,130,246,0.7)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(59,130,246,0.06)";
-                e.currentTarget.style.borderColor = "rgba(59,130,246,0.4)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              View Projects
-              <FiArrowRight className="text-base group-hover:translate-x-1 transition-transform" />
-            </a>
-
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300"
-              style={{
-                border: "1px solid rgba(139,92,246,0.3)",
-                color: "#8b5cf6",
-                background: "rgba(139,92,246,0.05)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(139,92,246,0.1)";
-                e.currentTarget.style.borderColor = "rgba(139,92,246,0.6)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(139,92,246,0.05)";
-                e.currentTarget.style.borderColor = "rgba(139,92,246,0.3)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              <FiMail className="text-base" />
-              Contact Me
-            </a>
-          </motion.div>
-
-          {/* Socials - light */}
-          <motion.div {...fadeIn(0.52)} className="flex items-center gap-5 mt-8">
-            <span className="text-xs tracking-widest uppercase text-gray-400">
-              Find me on
-            </span>
-            <div className="flex gap-4">
-              {SOCIALS.map((s, i) => (
-                <a
-                  key={i}
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="flex items-center justify-center w-9 h-9 rounded-lg text-lg transition-all duration-200 text-gray-500 hover:text-blue-600 border border-gray-200 bg-white/60 hover:border-blue-400 hover:bg-blue-50"
-                  style={{ transform: "translateY(0)" }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-3px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                  }}
-                >
-                  {s.icon}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-
-        {/* ── RIGHT COLUMN — IMAGE (BORDERS REMOVED) ── */}
-        <motion.div
-          {...fadeIn(0.3)}
-          className="relative flex justify-center items-center"
-          style={{
-            transform: prefersReducedMotion
-              ? "none"
-              : `perspective(800px) rotateY(${mousePos.x * 0.015}deg) rotateX(${-mousePos.y * 0.015}deg)`,
-            transition: "transform 0.1s ease-out",
-          }}
-        >
-          {/* Removed outer decorative frame and corner accents */}
-
-          {/* Soft glow behind image (kept for depth) */}
-          <div
-            className="absolute"
-            style={{
-              inset: "10%",
-              borderRadius: 20,
-              background:
-                "radial-gradient(ellipse at center, rgba(59,130,246,0.2) 0%, transparent 70%)",
-              filter: "blur(20px)",
-              zIndex: 1,
-            }}
-          />
-
-          {/* Profile Image — clean card, no border/shadow */}
-          <div
-            className="relative overflow-hidden"
-            style={{
-              width: "100%",
-              maxWidth: 400,
-              aspectRatio: "3 / 4",
-              borderRadius: 20,
-              zIndex: 2,
-              boxShadow: "none", // removed border shadow
-            }}
-          >
-            <img
-              src={profileImage}
-              alt="Emmanuel Kiptoo — Full Stack Developer"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center top",
-                display: "block",
-              }}
-              loading="eager"
-            />
-
-            {/* Subtle gradient overlay at bottom for name legibility */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: "35%",
-                background:
-                  "linear-gradient(to top, rgba(255,255,255,0.9) 0%, transparent 100%)",
-              }}
-            />
-
-
-          </div>
-
-          {/* Floating badges (kept as is) */}
-          <motion.div
-            animate={prefersReducedMotion ? {} : { y: [0, -6, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            style={{
-              position: "absolute",
-              top: 16,
-              right: -20,
-              padding: "8px 14px",
-              borderRadius: 12,
-              background: "rgba(255,255,255,0.95)",
-              border: "1px solid rgba(59,130,246,0.2)",
-              boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
-              zIndex: 10,
-              backdropFilter: "blur(12px)",
-            }}
-          >
-            <p style={{ margin: 0, fontSize: 11, color: "#3b82f6", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-              67+ Repos
-            </p>
-            <p style={{ margin: "1px 0 0", fontSize: 10, color: "#6b7280" }}>
-              on GitHub
-            </p>
-          </motion.div>
-
-          <motion.div
-            animate={prefersReducedMotion ? {} : { y: [0, 6, 0] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            style={{
-              position: "absolute",
-              bottom: 24,
-              left: -24,
-              padding: "8px 14px",
-              borderRadius: 12,
-              background: "rgba(255,255,255,0.95)",
-              border: "1px solid rgba(139,92,246,0.2)",
-              boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
-              zIndex: 10,
-              backdropFilter: "blur(12px)",
-            }}
-          >
-            <p style={{ margin: 0, fontSize: 11, color: "#8b5cf6", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-              Open to Work
-            </p>
-            <p style={{ margin: "1px 0 0", fontSize: 10, color: "#6b7280" }}>
-              Full-time / Freelance
-            </p>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* ── Tech Stack Strip (light theme) ── */}
-      <motion.div
-        {...fadeUp(0.6)}
-        className="absolute bottom-0 left-0 right-0"
-        style={{
-          borderTop: "1px solid rgba(0,0,0,0.05)",
-          background: "rgba(255,255,255,0.8)",
-          backdropFilter: "blur(12px)",
-          padding: "16px 40px",
-        }}
-      >
-        <div className="max-w-6xl mx-auto flex items-center gap-6 flex-wrap justify-center md:justify-start">
-          <span
-            className="text-xs font-semibold tracking-widest uppercase text-gray-400 shrink-0"
-          >
-            Tech Stack
-          </span>
-          <div className="flex gap-5 flex-wrap">
-            {TECH_STACK.map((tech, i) => (
               <motion.div
-                key={i}
-                whileHover={{ scale: 1.25, y: -4 }}
-                transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                className="flex items-center gap-1.5 cursor-default group"
-                title={tech.label}
+                key={roleIndex}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.4 }}
+                className="text-base sm:text-lg font-semibold text-indigo-600 dark:text-indigo-300 tracking-wide flex items-center gap-2"
               >
-                <span
-                  className="text-xl transition-all duration-200"
-                  style={{ color: tech.color, opacity: 0.7 }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
-                >
-                  {tech.icon}
-                </span>
-                <span
-                  className="text-xs hidden md:block text-gray-500"
-                >
-                  {tech.label}
-                </span>
+                <span className="text-slate-400 dark:text-slate-500 font-mono text-sm">&gt;</span>
+                {ROLES[roleIndex]}
               </motion.div>
-            ))}
+            </motion.div>
+
+            {/* Value Proposition */}
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl"
+            >
+              Full Stack Developer at Eclectics International Limited. I build mission-critical banking rails, M-PESA escrow switches, and high-throughput microservices using{" "}
+              <span className="text-slate-900 dark:text-slate-100 font-semibold">Java Spring Boot, Angular, React,</span> and{" "}
+              <span className="text-slate-900 dark:text-slate-100 font-semibold">PostgreSQL</span> with sub-second performance.
+            </motion.p>
+
+            {/* Primary Actions */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-6 flex flex-wrap items-center gap-3.5"
+            >
+              <motion.a
+                whileHover={!prefersReducedMotion ? { y: -2, scale: 1.02 } : {}}
+                whileTap={{ scale: 0.98 }}
+                href="#projects"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs uppercase tracking-wider shadow-lg shadow-indigo-600/25 transition-all duration-200"
+              >
+                View Projects
+                <FiArrowRight className="text-sm" />
+              </motion.a>
+
+              <motion.a
+                whileHover={!prefersReducedMotion ? { y: -2, scale: 1.02 } : {}}
+                whileTap={{ scale: 0.98 }}
+                href="https://drive.google.com/file/d/1YVDPKJ4OYFYeInogbnj6WzmAWNwQEQa-/view?usp=drive_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700/80 font-semibold text-xs uppercase tracking-wider shadow-sm transition-all duration-200"
+              >
+                <FiDownload className="text-sm" />
+                Resume
+              </motion.a>
+
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-1.5 px-3 py-3 text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-sky-300 font-semibold text-xs tracking-wider transition-colors duration-200"
+              >
+                Contact
+              </a>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800/80 w-full max-w-md flex items-center gap-4"
+            >
+              <span className="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+                Socials
+              </span>
+              <div className="flex gap-2">
+                {SOCIALS.map((s, i) => (
+                  <motion.a
+                    key={i}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    whileHover={{ y: -2, scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="p-2 rounded-lg bg-white dark:bg-slate-900/80 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white shadow-xs transition-colors"
+                  >
+                    {s.icon}
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Prominent Top Hacker Terminal */}
+          <div className="lg:col-span-6 w-full">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative w-full"
+            >
+              {/* Terminal glowing back illumination */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 via-indigo-500/15 to-sky-500/20 rounded-3xl blur-2xl -z-10" />
+
+              {/* Embedded Interactive Terminal */}
+              <Terminal embedded={true} />
+            </motion.div>
           </div>
         </div>
-      </motion.div>
-
-      {/* ── Scroll indicator (light) ── */}
-      <motion.div
-        animate={prefersReducedMotion ? {} : { y: [0, 8, 0], opacity: [0.4, 1, 0.4] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute right-8 bottom-24 hidden md:flex flex-col items-center gap-2 text-gray-400"
-      >
-        <span className="text-xs tracking-widest uppercase" style={{ writingMode: "vertical-rl" }}>
-          Scroll
-        </span>
-        <div
-          style={{
-            width: 1,
-            height: 48,
-            background: "linear-gradient(to bottom, #3b82f6, transparent)",
-          }}
-        />
-      </motion.div>
+      </div>
     </section>
   );
 }
