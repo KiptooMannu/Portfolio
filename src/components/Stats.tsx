@@ -75,7 +75,7 @@ function CountUp({ to, unit, active }: { to: number; unit: string; active: boole
     return () => clearInterval(id);
   }, [active, to]);
   return (
-    <span className="text-3xl font-extrabold tabular-nums">
+    <span className="text-[clamp(1rem,4vw,1.875rem)] leading-tight font-extrabold tabular-nums whitespace-nowrap">
       {val % 1 === 0 ? val.toFixed(0) : val.toFixed(2)}{unit}
     </span>
   );
@@ -244,13 +244,13 @@ export default function Stats() {
         </motion.div>
 
         {/* ── Row 1: Metric Cards ──────────────────────── */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,10rem),1fr))] gap-4 mb-10">
           {metrics.map((m, i) => (
             <motion.div
               key={m.label}
               {...fade(0.1 + i * 0.08)}
               whileHover={prefersReducedMotion ? {} : { y: -4, scale: 1.02 }}
-              className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-5 flex flex-col gap-2 overflow-hidden group transition-colors duration-300"
+              className="relative min-w-0 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-4 flex flex-col gap-2 overflow-hidden group transition-colors duration-300"
             >
               {/* Glow on hover */}
               <div
