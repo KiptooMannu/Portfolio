@@ -43,7 +43,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[calc(100vh-80px)] flex flex-col justify-center overflow-hidden pt-8 pb-16 bg-slate-50/50 dark:bg-slate-950 transition-colors duration-300"
+      className="relative min-h-[calc(100vh-80px)] flex flex-col justify-center overflow-hidden pt-6 sm:pt-8 pb-12 sm:pb-16 bg-slate-50/50 dark:bg-slate-950 transition-colors duration-300"
     >
       {/* Ambient background glows */}
       <div
@@ -61,16 +61,16 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#cbd5e125_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e125_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]"
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-8 w-full">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center">
           {/* Left Column: Profile & Copy */}
-          <div className="lg:col-span-6 flex flex-col items-start">
+          <div className="min-w-0 lg:col-span-6 flex flex-col items-start">
             {/* Availability Pill */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-semibold tracking-wide mb-5 shadow-sm"
+              className="inline-flex max-w-full flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-semibold tracking-wide mb-5 shadow-sm"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -84,19 +84,19 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex items-center gap-3.5 mb-5 p-2 pr-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm"
+              className="flex max-w-full items-center gap-3.5 mb-5 p-2 pr-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm"
             >
               <img
                 src={profileImage}
                 alt="Emmanuel Kiptoo"
                 className="w-12 h-12 rounded-xl object-cover object-top border border-indigo-200 dark:border-indigo-500/30"
               />
-              <div className="flex flex-col">
+              <div className="min-w-0 flex flex-col">
                 <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1">
                   Emmanuel Kiptoo
                   <FiShield className="text-sky-500 text-xs inline" />
                 </span>
-                <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 break-words">
                   Kirinyaga University Software Engineering (Honours)
                 </span>
               </div>
@@ -108,7 +108,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
                 Engineering Scalable{" "}
                 <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-indigo-700 dark:from-sky-400 dark:via-indigo-300 dark:to-indigo-400 bg-clip-text text-transparent">
                   Fintech Solutions
@@ -121,7 +121,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-3 h-8 overflow-hidden"
+              className="mt-3 min-h-8 max-w-full overflow-hidden"
             >
               <motion.div
                 key={roleIndex}
@@ -129,7 +129,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.4 }}
-                className="text-base sm:text-lg font-semibold text-indigo-600 dark:text-indigo-300 tracking-wide flex items-center gap-2"
+                className="text-sm sm:text-base md:text-lg font-semibold text-indigo-600 dark:text-indigo-300 tracking-wide flex flex-wrap items-center gap-2"
               >
                 <span className="text-slate-400 dark:text-slate-500 font-mono text-sm">&gt;</span>
                 {ROLES[roleIndex]}
@@ -153,7 +153,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-6 flex flex-wrap items-center gap-3.5"
+              className="mt-6 flex max-w-full flex-wrap items-center gap-2 sm:gap-3.5"
             >
               <motion.a
                 whileHover={!prefersReducedMotion ? { y: -2, scale: 1.02 } : {}}
@@ -215,7 +215,7 @@ export default function Hero() {
           </div>
 
           {/* Right Column: Prominent Top Hacker Terminal */}
-          <div className="lg:col-span-6 w-full">
+          <div className="min-w-0 lg:col-span-6 w-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}

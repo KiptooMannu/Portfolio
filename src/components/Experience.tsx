@@ -92,7 +92,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="relative py-24 bg-slate-50/50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-900 overflow-hidden transition-colors duration-300"
+      className="relative py-16 sm:py-20 lg:py-24 bg-slate-50/50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-900 overflow-hidden transition-colors duration-300"
     >
       {/* Background ambient lighting */}
       <div
@@ -100,19 +100,19 @@ export default function Experience() {
         className="pointer-events-none absolute top-1/2 left-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-[110px]"
       />
 
-      <div className="relative max-w-5xl mx-auto px-6 md:px-8">
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-10 sm:mb-16"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-2 inline-block">
             Verified Career History
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Work Experience
           </h2>
           <p className="mt-3 text-slate-600 dark:text-slate-400 text-base sm:text-lg">
@@ -121,7 +121,7 @@ export default function Experience() {
         </motion.div>
 
         {/* Timeline List */}
-        <div className="relative border-l border-slate-200 dark:border-slate-800 ml-4 sm:ml-6 md:ml-40 space-y-12">
+        <div className="relative border-l border-slate-200 dark:border-slate-800 ml-3 sm:ml-6 md:ml-40 space-y-8 sm:space-y-12">
           {experiences.map((exp, idx) => (
             <motion.div
               key={idx}
@@ -129,7 +129,7 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.15 }}
-              className="relative pl-7 sm:pl-9"
+              className="relative min-w-0 pl-6 sm:pl-9"
             >
               {/* Timeline Indicator Dot */}
               <div className="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-white dark:bg-slate-950 border-2 border-indigo-600 dark:border-indigo-500 flex items-center justify-center shadow-sm">
@@ -147,10 +147,10 @@ export default function Experience() {
               {/* Card Container */}
               <motion.div
                 whileHover={!prefersReducedMotion ? { y: -6, scale: 1.01 } : {}}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400 dark:hover:border-indigo-500/50 shadow-md hover:shadow-2xl hover:shadow-indigo-500/15 dark:hover:shadow-indigo-500/20 transition-all duration-300"
+                className="min-w-0 p-4 sm:p-6 lg:p-8 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400 dark:hover:border-indigo-500/50 shadow-md hover:shadow-2xl hover:shadow-indigo-500/15 dark:hover:shadow-indigo-500/20 transition-all duration-300"
               >
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
-                  <div className="flex items-start gap-4">
+                <div className="flex min-w-0 flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4 mb-4">
+                  <div className="flex min-w-0 items-start gap-3 sm:gap-4">
                     {/* Company icon or logo */}
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/10 to-sky-500/10 dark:from-indigo-950 dark:to-slate-900 border border-indigo-200 dark:border-slate-800 flex items-center justify-center shrink-0 shadow-sm overflow-hidden">
                       {exp.logo ? (
@@ -164,8 +164,8 @@ export default function Experience() {
                       )}
                     </div>
 
-                    <div>
-                      <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">
+                    <div className="min-w-0">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 dark:text-white leading-tight break-words">
                         {exp.role}
                       </h3>
                       <div className="flex flex-wrap items-center gap-2 mt-1">
@@ -183,7 +183,7 @@ export default function Experience() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     {exp.status && (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -207,7 +207,7 @@ export default function Experience() {
                   </p>
                   <ul className="space-y-2">
                     {exp.responsibilities.map((resp, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300 leading-normal">
+                      <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-normal">
                         <FiCheckCircle className="text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
                         <span>{resp}</span>
                       </li>
