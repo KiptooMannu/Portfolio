@@ -15,6 +15,7 @@ import {
   Bar,
   Cell,
 } from "recharts";
+import { useTheme } from "../context/ThemeContext";
 
 /* ─── Data ─────────────────────────────────────────── */
 
@@ -82,7 +83,7 @@ function CountUp({ to, unit, active }: { to: number; unit: string; active: boole
 
 /* ─── Africa SVG Map ────────────────────────────────── */
 // Simplified Africa outline + Kenya highlight
-function AfricaMap() {
+function AfricaMap({ isDark }: { isDark: boolean }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div className="relative flex flex-col items-center justify-center h-full min-h-[280px] select-none">
@@ -91,7 +92,7 @@ function AfricaMap() {
         <path
           d="M130 10 L210 8 L250 30 L270 60 L280 100 L290 140 L295 180 L285 220 L270 255 L250 280 L225 310 L200 335 L175 355 L160 365 L145 355 L125 330 L100 300 L75 260 L55 220 L45 175 L48 135 L60 100 L75 70 L95 45 Z"
           fill="url(#africaGrad)"
-          stroke="#334155"
+          stroke={isDark ? "#334155" : "#cbd5e1"}
           strokeWidth="1.5"
           opacity="0.85"
         />
@@ -99,7 +100,7 @@ function AfricaMap() {
         <motion.path
           d="M200 195 L220 190 L230 205 L225 225 L210 235 L195 228 L185 215 L190 200 Z"
           fill={hovered ? "#34d399" : "#10b981"}
-          stroke="#a7f3d0"
+          stroke={isDark ? "#a7f3d0" : "#047857"}
           strokeWidth="1.2"
           animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 2.5, repeat: Infinity }}
@@ -133,20 +134,20 @@ function AfricaMap() {
         {/* Gradient defs */}
         <defs>
           <linearGradient id="africaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#1e293b" />
-            <stop offset="100%" stopColor="#0f172a" />
+            <stop offset="0%" stopColor={isDark ? "#1e293b" : "#e2e8f0"} />
+            <stop offset="100%" stopColor={isDark ? "#0f172a" : "#f8fafc"} />
           </linearGradient>
         </defs>
       </svg>
       {/* Label */}
-      <div className="absolute top-3 left-3 bg-slate-900/90 border border-emerald-500/40 rounded-lg px-3 py-1.5 text-xs font-mono text-emerald-400">
+      <div className="absolute top-3 left-3 bg-white/90 dark:bg-slate-900/90 border border-emerald-500/40 rounded-lg px-3 py-1.5 text-xs font-mono text-emerald-700 dark:text-emerald-400">
         <span className="animate-pulse mr-1">●</span> Nairobi, Kenya
       </div>
       {hovered && (
         <motion.div
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute bottom-6 bg-slate-900/95 border border-emerald-500/50 rounded-xl px-4 py-2 text-xs font-mono text-slate-200 shadow-xl"
+          className="absolute bottom-6 bg-white/95 dark:bg-slate-900/95 border border-emerald-500/50 rounded-xl px-4 py-2 text-xs font-mono text-slate-700 dark:text-slate-200 shadow-xl"
         >
           🌍 Pan-Africa Fintech Coverage · 99.99% SLA
         </motion.div>
@@ -161,12 +162,12 @@ interface RadarDotProps {
   cy?: number;
   index?: number;
 }
-function RadarDot({ cx = 0, cy = 0 }: RadarDotProps) {
+function RadarDot({ cx = 0, cy = 0, isDark }: RadarDotProps & { isDark: boolean }) {
   return (
     <motion.circle
       cx={cx} cy={cy} r={4}
       fill="#38bdf8"
-      stroke="#0f172a"
+      stroke={isDark ? "#0f172a" : "#ffffff"}
       strokeWidth={2}
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
@@ -185,12 +186,12 @@ interface CustomTooltipProps {
   payload?: TooltipPayload[];
   label?: string;
 }
-function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
+function CustomTooltip({ active, payload, label, isDark }: CustomTooltipProps & { isDark: boolean }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-slate-900/95 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-slate-200 shadow-xl">
+    <div className="bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-slate-700 dark:text-slate-200 shadow-xl">
       <p className="text-sky-400 font-bold">{label}</p>
-      <p style={{ color: payload[0].color ?? "#38bdf8" }}>{payload[0].value} commits</p>
+      <p style={{ color: payload[0].color ?? (isDark ? "#38bdf8" : "#0284c7") }}>{payload[0].value} commits</p>
     </div>
   );
 }
@@ -198,6 +199,10 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
 /* ─── Main Component ─────────────────────────────────── */
 export default function Stats() {
   const prefersReducedMotion = useReducedMotion();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const chartTextColor = isDark ? "#94a3b8" : "#64748b";
+  const chartMutedColor = isDark ? "#475569" : "#94a3b8";
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
 
@@ -210,7 +215,7 @@ export default function Stats() {
     <section
       id="stats"
       ref={sectionRef}
-      className="relative py-24 bg-slate-950 overflow-hidden"
+      className="relative py-24 bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors duration-300"
     >
       {/* Background grid */}
       <div
@@ -230,10 +235,10 @@ export default function Stats() {
             <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
             LIVE METRICS · SKILLS TELEMETRY
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-2">
             By the <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-400">Numbers</span>
           </h2>
-          <p className="mt-3 text-slate-400 text-sm max-w-xl mx-auto">
+          <p className="mt-3 text-slate-600 dark:text-slate-400 text-sm max-w-xl mx-auto">
             Real data from 2+ years of engineering: optimizations, coverage metrics, and geographic impact across Africa's fintech rails.
           </p>
         </motion.div>
@@ -245,20 +250,20 @@ export default function Stats() {
               key={m.label}
               {...fade(0.1 + i * 0.08)}
               whileHover={prefersReducedMotion ? {} : { y: -4, scale: 1.02 }}
-              className="relative rounded-2xl border border-slate-800 bg-slate-900/80 p-5 flex flex-col gap-2 overflow-hidden group"
+              className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-5 flex flex-col gap-2 overflow-hidden group transition-colors duration-300"
             >
               {/* Glow on hover */}
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
                 style={{ background: `radial-gradient(ellipse at 50% 0%, ${m.color}22 0%, transparent 70%)` }}
               />
-              <p className="text-xs font-mono text-slate-400">{m.desc}</p>
+              <p className="text-xs font-mono text-slate-600 dark:text-slate-400">{m.desc}</p>
               <div style={{ color: m.color }}>
                 <CountUp to={m.value} unit={m.unit} active={inView} />
               </div>
-              <p className="text-sm font-semibold text-white">{m.label}</p>
+              <p className="text-sm font-semibold text-slate-900 dark:text-white">{m.label}</p>
               {/* Mini progress bar */}
-              <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden mt-1">
+              <div className="h-1 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden mt-1">
                 <motion.div
                   className="h-1 rounded-full"
                   style={{ background: m.color }}
@@ -277,17 +282,17 @@ export default function Stats() {
           {/* Radar: Skill Proficiency */}
           <motion.div
             {...fade(0.2)}
-            className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 flex flex-col"
+            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 flex flex-col transition-colors duration-300"
           >
-            <h3 className="text-sm font-semibold text-white mb-1">Skill Proficiency Radar</h3>
-            <p className="text-xs text-slate-400 mb-4 font-mono">Self-assessed · validated in production</p>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">Skill Proficiency Radar</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mb-4 font-mono">Self-assessed · validated in production</p>
             <div className="flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={skillRadar} outerRadius="72%">
-                  <PolarGrid stroke="#1e293b" strokeWidth={1} />
+                  <PolarGrid stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth={1} />
                   <PolarAngleAxis
                     dataKey="skill"
-                    tick={{ fill: "#94a3b8", fontSize: 10, fontFamily: "monospace" }}
+                    tick={{ fill: chartTextColor, fontSize: 10, fontFamily: "monospace" }}
                   />
                   <Radar
                     dataKey="value"
@@ -295,7 +300,7 @@ export default function Stats() {
                     fill="#38bdf8"
                     fillOpacity={0.2}
                     strokeWidth={2}
-                    dot={<RadarDot />}
+                    dot={<RadarDot isDark={isDark} />}
                   />
                 </RadarChart>
               </ResponsiveContainer>
@@ -305,10 +310,10 @@ export default function Stats() {
           {/* Area: Commit Activity */}
           <motion.div
             {...fade(0.28)}
-            className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 flex flex-col"
+            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 flex flex-col transition-colors duration-300"
           >
-            <h3 className="text-sm font-semibold text-white mb-1">Commit Activity</h3>
-            <p className="text-xs text-slate-400 mb-4 font-mono">67+ public repos · 2025-2026</p>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">Commit Activity</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mb-4 font-mono">67+ public repos · 2025-2026</p>
             <div className="flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={commitActivity} margin={{ top: 4, right: 4, left: -28, bottom: 0 }}>
@@ -318,9 +323,9 @@ export default function Stats() {
                       <stop offset="95%" stopColor="#38bdf8" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <XAxis dataKey="month" tick={{ fill: "#475569", fontSize: 9 }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fill: "#475569", fontSize: 9 }} axisLine={false} tickLine={false} />
-                  <Tooltip content={<CustomTooltip />} />
+                  <XAxis dataKey="month" tick={{ fill: chartMutedColor, fontSize: 9 }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fill: chartMutedColor, fontSize: 9 }} axisLine={false} tickLine={false} />
+                  <Tooltip content={<CustomTooltip isDark={isDark} />} />
                   <Area
                     type="monotone"
                     dataKey="commits"
@@ -328,7 +333,7 @@ export default function Stats() {
                     strokeWidth={2}
                     fill="url(#commitGrad)"
                     dot={false}
-                    activeDot={{ r: 5, fill: "#38bdf8", stroke: "#0f172a", strokeWidth: 2 }}
+                    activeDot={{ r: 5, fill: "#38bdf8", stroke: isDark ? "#0f172a" : "#ffffff", strokeWidth: 2 }}
                     isAnimationActive={!prefersReducedMotion}
                   />
                 </AreaChart>
@@ -339,12 +344,12 @@ export default function Stats() {
           {/* Africa map */}
           <motion.div
             {...fade(0.36)}
-            className="rounded-2xl border border-slate-800 bg-slate-900/80 p-4 flex flex-col"
+            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-4 flex flex-col transition-colors duration-300"
           >
-            <h3 className="text-sm font-semibold text-white mb-1 px-2">Geographic Footprint</h3>
-            <p className="text-xs text-slate-400 mb-2 font-mono px-2">Nairobi · Pan-Africa Fintech Rails</p>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-1 px-2">Geographic Footprint</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mb-2 font-mono px-2">Nairobi · Pan-Africa Fintech Rails</p>
             <div className="flex-1 relative">
-              <AfricaMap />
+              <AfricaMap isDark={isDark} />
             </div>
           </motion.div>
         </div>
@@ -352,19 +357,26 @@ export default function Stats() {
         {/* ── Row 3: Tech Stack Bars ────────────────────── */}
         <motion.div
           {...fade(0.4)}
-          className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6"
+          className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 transition-colors duration-300"
         >
-          <h3 className="text-sm font-semibold text-white mb-1">Tech Stack Confidence</h3>
-          <p className="text-xs text-slate-400 mb-5 font-mono">Proficiency across primary languages & tools</p>
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">Tech Stack Confidence</h3>
+          <p className="text-xs text-slate-600 dark:text-slate-400 mb-5 font-mono">Proficiency across primary languages & tools</p>
           <div className="h-[180px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={techBarData} margin={{ top: 4, right: 8, left: -24, bottom: 0 }}>
-                <XAxis dataKey="name" tick={{ fill: "#94a3b8", fontSize: 11 }} axisLine={false} tickLine={false} />
-                <YAxis domain={[0, 100]} tick={{ fill: "#475569", fontSize: 9 }} axisLine={false} tickLine={false} />
+                <XAxis dataKey="name" tick={{ fill: chartTextColor, fontSize: 11 }} axisLine={false} tickLine={false} />
+                <YAxis domain={[0, 100]} tick={{ fill: chartMutedColor, fontSize: 9 }} axisLine={false} tickLine={false} />
                 <Tooltip
                   cursor={{ fill: "rgba(56,189,248,0.05)" }}
-                  contentStyle={{ background: "#0f172a", border: "1px solid #334155", borderRadius: 12, fontSize: 12, fontFamily: "monospace" }}
-                  labelStyle={{ color: "#94a3b8" }}
+                  contentStyle={{
+                    background: isDark ? "#0f172a" : "#ffffff",
+                    border: `1px solid ${isDark ? "#334155" : "#cbd5e1"}`,
+                    borderRadius: 12,
+                    fontSize: 12,
+                    fontFamily: "monospace",
+                    color: isDark ? "#e2e8f0" : "#334155",
+                  }}
+                  labelStyle={{ color: chartTextColor }}
                   itemStyle={{ color: "#38bdf8" }}
                   formatter={(v: number) => [`${v}%`, "Proficiency"]}
                 />
