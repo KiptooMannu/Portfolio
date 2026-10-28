@@ -1,6 +1,5 @@
-import { motion, useReducedMotion } from "framer-motion";
 import { useState, useRef, useEffect, ReactNode } from "react";
-import { FiTerminal, FiCornerDownLeft, FiMaximize2, FiMinimize2, FiCopy, FiCheck, FiCpu, FiActivity, FiCode } from "react-icons/fi";
+import { FiTerminal, FiCornerDownLeft, FiMaximize2, FiMinimize2, FiCopy, FiCheck, FiCpu, FiActivity } from "react-icons/fi";
 import { useTheme } from "../context/ThemeContext";
 
 interface HistoryEntry {
@@ -27,7 +26,6 @@ const COMMANDS = [
 const MATRIX_CHARS = "0123456789ABCDEF$#@*+-%~><{}[]=";
 
 export default function Terminal({ embedded = false }: { embedded?: boolean }) {
-  const prefersReducedMotion = useReducedMotion();
   const { theme, toggleTheme, setTheme } = useTheme();
   const [activeTab, setActiveTab] = useState<"bash" | "fintech" | "telemetry">("bash");
   const [inputVal, setInputVal] = useState("");

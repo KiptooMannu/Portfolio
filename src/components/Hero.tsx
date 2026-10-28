@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { FiDownload, FiGithub, FiLinkedin, FiMail, FiArrowRight, FiMapPin, FiShield, FiTerminal } from "react-icons/fi";
+import { FiDownload, FiGithub, FiLinkedin, FiMail, FiArrowRight, FiShield } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import profileImage from "../assets/Mannu1.jpeg";
 import Terminal from "./Terminal";
